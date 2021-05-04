@@ -22,4 +22,11 @@ public class registerController  {
         Stage window = (Stage) doctorBtn.getScene().getWindow();
         window.setScene(new Scene(root, 610, 470));
     }
+    public void handlePatientBtn() throws Exception {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/patientRegister.fxml"));
+
+        Stage window = (Stage) patientBtn.getScene().getWindow();
+        window.setScene(new Scene(root, 610, 470));
+    }
 }
