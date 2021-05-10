@@ -1,4 +1,4 @@
-package sample;
+package patientcare;
 
 
 import javafx.event.ActionEvent;
@@ -8,9 +8,12 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import patientcare.services.UserService;
 
+//import javax.swing.*;
 import java.io.File;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class patientRegisterController implements Initializable {
@@ -37,8 +40,14 @@ public class patientRegisterController implements Initializable {
     private TextField emailTextField;
     @FXML
     private TextField pnTextField;
-
-
+    @FXML
+    private RadioButton genderM;
+    @FXML
+    private RadioButton genderF;
+    @FXML
+    private RadioButton genderO;
+    @FXML
+    private DatePicker dobField;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -65,6 +74,12 @@ public class patientRegisterController implements Initializable {
         }
     }
     public void registerUser (){
+        String gender="";
+
+        if(genderM.isSelected()) gender="Male";
+        else if(genderF.isSelected()) gender="Female";
+        else if(genderO.isSelected()) gender="Other";
+        UserService.addPatient(fnameTextField.getText(), lnameTextField.getText(), pnTextField.getText(), dobField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) ,usernameTextField.getText(),setPasswordField.getText(),emailTextField.getText(), gender);
 
     }
 }
