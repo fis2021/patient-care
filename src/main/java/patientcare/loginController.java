@@ -1,7 +1,10 @@
 package patientcare;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -13,6 +16,7 @@ import javafx.event.ActionEvent;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 import java.net.URL;
@@ -20,7 +24,9 @@ import java.net.URL;
 public class loginController implements Initializable {
 
     @FXML
-    private Button cancelButton;
+    private Button returnButton;
+    @FXML
+    private Button newaccountBtn;
     @FXML
     private ImageView brandingImageView;
     @FXML
@@ -54,10 +60,21 @@ public class loginController implements Initializable {
          }
      }
 
-     public void cancelButtonOnAction (ActionEvent event) {
-         Stage stage = (Stage) cancelButton.getScene().getWindow();
-         stage.close();
-     }
+    public void returnButtonOnAction (ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/homepage.fxml"));
+
+        Stage window = (Stage) returnButton.getScene().getWindow();
+        window.setScene(new Scene(root, 768, 574));
+    }
+
+    public void newAccountButtonOnAction (ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/register.fxml"));
+
+        Stage window = (Stage) newaccountBtn.getScene().getWindow();
+        window.setScene(new Scene(root, 280, 230));
+    }
 }
 
 

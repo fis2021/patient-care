@@ -27,6 +27,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
+            <Button fx:id="returnButton" layoutX="576.0" layoutY="8.0" mnemonicParsing="false" onAction="#returnButtonOnAction" prefHeight="26.0" prefWidth="30.0" style="-fx-background-color: #045D1B;" text="&lt;-" textFill="#faf6f6" />
          </children>
       </AnchorPane>
       <Label layoutX="39.0" layoutY="114.0" text="First Name" textFill="#045d1b" />

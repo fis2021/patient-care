@@ -14,6 +14,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
+            <Button fx:id="returnButton" layoutX="236.0" layoutY="9.0" mnemonicParsing="false" onAction="#returnButtonOnAction" style="-fx-background-color: #40BF64;" text="&lt;-" textFill="#045d1b" />
          </children>
       </AnchorPane>
       <Label layoutX="48.0" layoutY="102.0" text="Which role are you choosing?" textFill="#045d1b">
