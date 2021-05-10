@@ -1,9 +1,15 @@
 package patientcare;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -19,6 +25,10 @@ public class homepageController implements Initializable {
     private ImageView searchImageView;
     @FXML
     private ImageView nameImageView;
+    @FXML
+    private Button cancelButton;
+    @FXML
+    private Button specializationsBtn;
 
 
     @Override
@@ -39,5 +49,16 @@ public class homepageController implements Initializable {
         Image nameImage = new Image(nameFile.toURI().toString());
         nameImageView.setImage(nameImage);
 
+    }
+    public void cancelButtonOnAction (ActionEvent event) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+    }
+    public void handleSpecializationsBtn() throws Exception {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/specializations.fxml"));
+
+        Stage window = (Stage) specializationsBtn.getScene().getWindow();
+        window.setScene(new Scene(root, 400, 400));
     }
 }

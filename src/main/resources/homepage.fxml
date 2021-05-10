@@ -22,27 +22,28 @@
                   <Image url="@../../../images/scris.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="searchImageView" fitHeight="13.0" fitWidth="21.0" layoutX="242.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="searchImageView" fitHeight="13.0" fitWidth="21.0" layoutX="243.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/searchicon.png" />
                </image>
             </ImageView>
-            <Button layoutX="577.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="187.0" style="-fx-background-color: #045D1B;" text="Online Appointment" textFill="#40bf64">
+            <Button layoutX="577.0" layoutY="22.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="187.0" style="-fx-background-color: #045D1B;" text="Online Appointment" textFill="#40bf64">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Button>
-            <Button layoutX="462.0" layoutY="4.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="111.0" style="-fx-background-color: #045D1B;" text="My Account" textFill="#40bf64">
+            <Button layoutX="465.0" layoutY="25.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="111.0" style="-fx-background-color: #045D1B;" text="My Account" textFill="#40bf64">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Button>
-            <TextField layoutX="265.0" layoutY="33.0" prefHeight="26.0" prefWidth="187.0" />
+            <TextField layoutX="265.0" layoutY="42.0" prefHeight="26.0" prefWidth="187.0" />
+            <Button fx:id="cancelButton" layoutX="742.0" layoutY="1.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="15.0" prefWidth="11.0" style="-fx-background-color: #045D1B;" text="X" textFill="#faf6f6" />
          </children>
       </AnchorPane>
       <AnchorPane layoutY="90.0" prefHeight="52.0" prefWidth="768.0" style="-fx-background-color: #AEB5AF;">
          <children>
-            <Button layoutY="1.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: #AEB5AF;" text="Specializations">
+            <Button fx:id="specializationsBtn" layoutY="1.0" mnemonicParsing="false" onAction="#handleSpecializationsBtn" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: #AEB5AF;" text="Specializations">
                <font>
                   <Font size="14.0" />
                </font>
