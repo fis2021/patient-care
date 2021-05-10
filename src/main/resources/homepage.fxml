@@ -53,7 +53,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button layoutX="612.0" layoutY="1.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: #AEB5AF;" text="About Us">
+            <Button fx:id="aboutusBtn" layoutX="612.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleAboutUsBtn" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: #AEB5AF;" text="About Us">
                <font>
                   <Font size="14.0" />
                </font>

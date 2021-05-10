@@ -31,6 +31,8 @@ public class homepageController implements Initializable {
     private Button specializationsBtn;
     @FXML
     private Button doctorsBtn;
+    @FXML
+    private Button aboutusBtn;
 
 
 
@@ -69,6 +71,13 @@ public class homepageController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/doctors.fxml"));
 
         Stage window = (Stage) doctorsBtn.getScene().getWindow();
+        window.setScene(new Scene(root, 400, 400));
+    }
+    public void handleAboutUsBtn() throws Exception {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/aboutus.fxml"));
+
+        Stage window = (Stage) aboutusBtn.getScene().getWindow();
         window.setScene(new Scene(root, 400, 400));
     }
 }

@@ -21,7 +21,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="cancelButton" layoutX="362.0" layoutY="12.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="15.0" prefWidth="11.0" style="-fx-background-color: #045D1B;" text="X" textFill="#faf6f6" />
+            <Button fx:id="returnButton" layoutX="354.0" layoutY="12.0" mnemonicParsing="false" onAction="#returnButtonOnAction" prefHeight="26.0" prefWidth="30.0" style="-fx-background-color: #045D1B;" text="&lt;-" textFill="#faf6f6" />
          </children>
       </AnchorPane>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="105.0" prefHeight="26.0" prefWidth="392.0" text="The purpose of the following application is to bring both " textFill="#045d1b">
