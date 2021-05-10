@@ -29,6 +29,9 @@ public class homepageController implements Initializable {
     private Button cancelButton;
     @FXML
     private Button specializationsBtn;
+    @FXML
+    private Button doctorsBtn;
+
 
 
     @Override
@@ -59,6 +62,13 @@ public class homepageController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/specializations.fxml"));
 
         Stage window = (Stage) specializationsBtn.getScene().getWindow();
+        window.setScene(new Scene(root, 400, 400));
+    }
+    public void handleDoctorsBtn() throws Exception {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/doctors.fxml"));
+
+        Stage window = (Stage) doctorsBtn.getScene().getWindow();
         window.setScene(new Scene(root, 400, 400));
     }
 }
