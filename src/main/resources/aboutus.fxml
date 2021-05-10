@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="338.0" prefWidth="400.0" style="-fx-background-color: #40BF64;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="patientcare.aboutusController">
+   <children>
+      <AnchorPane prefHeight="88.0" prefWidth="400.0" style="-fx-background-color: #045D1B;">
+         <children>
+            <ImageView fx:id="logoImageView" fitHeight="88.0" fitWidth="98.0" layoutX="21.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../Desktop/ANUL%202%20CTI/SEMESTRUL%202/FIS/images/logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="115.0" layoutY="26.0" text="About Us" textFill="#40bf64">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="cancelButton" layoutX="362.0" layoutY="12.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="15.0" prefWidth="11.0" style="-fx-background-color: #045D1B;" text="X" textFill="#faf6f6" />
+         </children>
+      </AnchorPane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="105.0" prefHeight="26.0" prefWidth="392.0" text="The purpose of the following application is to bring both " textFill="#045d1b">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="6.0" layoutY="135.0" prefHeight="26.0" prefWidth="392.0" text="doctors and patients together. With all the pandemic" textFill="#045d1b">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="4.0" layoutY="165.0" prefHeight="26.0" prefWidth="392.0" text=" situation it is really hard to make a medical appointment, " textFill="#045d1b">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="6.0" layoutY="195.0" prefHeight="26.0" prefWidth="392.0" text="especially when you need to go to a medical office for that." textFill="#045d1b">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="6.0" layoutY="225.0" prefHeight="26.0" prefWidth="392.0" text=" We want to make their life easier by making a platform " textFill="#045d1b">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="4.0" layoutY="255.0" prefHeight="26.0" prefWidth="392.0" text=" based on doctor's services and customer needs." textFill="#045d1b">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
