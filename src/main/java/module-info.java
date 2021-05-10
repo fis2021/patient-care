@@ -4,5 +4,5 @@ module patientcare {
     requires javafx.graphics;
     requires mongo.java.driver;
 
-    opens sample;
+    opens patientcare;
 }

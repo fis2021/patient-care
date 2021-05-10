@@ -1,4 +1,4 @@
-package sample.services;
+package patientcare.services;
 import com.mongodb.*;
 public class UserService {
 
