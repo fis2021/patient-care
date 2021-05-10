@@ -26,6 +26,8 @@ public class Main extends Application {
 
         UserService.printDoctors();
         UserService.printPatients();
+
+       // UserService.dropDB();
     }
 
 }

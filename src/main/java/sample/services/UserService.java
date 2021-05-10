@@ -1,4 +1,4 @@
-package patientcare.services;
+package sample.services;
 import com.mongodb.*;
 public class UserService {
 
@@ -64,8 +64,9 @@ public class UserService {
             System.out.println();
         }
     }
-    public static void dropDB () {
+    public static void dropDB()
+    {
         doctorCollection.drop();
-        patientCollection.drop();
+
     }
 }

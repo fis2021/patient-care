@@ -46,13 +46,13 @@
       <Label layoutX="324.0" layoutY="279.0" text="Confirm Password" textFill="#045d1b" />
       <HBox layoutX="195.0" layoutY="337.0" prefHeight="26.0" prefWidth="210.0">
          <children>
-            <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="72.0" selected="true" text="Male" textFill="#045d1b">
+            <RadioButton fx:id="genderM" mnemonicParsing="false" prefHeight="18.0" prefWidth="72.0" selected="true" text="Male" textFill="#045d1b">
                <toggleGroup>
                   <ToggleGroup fx:id="gender" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="74.0" text="Female" textFill="#045d1b" toggleGroup="$gender" />
-            <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="58.0" text="Other" textFill="#045d1b" toggleGroup="$gender" />
+            <RadioButton fx:id="genderF" mnemonicParsing="false" prefHeight="18.0" prefWidth="74.0" text="Female" textFill="#045d1b" toggleGroup="$gender" />
+            <RadioButton fx:id="genderO" mnemonicParsing="false" prefHeight="18.0" prefWidth="58.0" text="Other" textFill="#045d1b" toggleGroup="$gender" />
          </children>
       </HBox>
       <PasswordField fx:id="setPasswordField" layoutX="323.0" layoutY="244.0" opacity="0.5" prefHeight="26.0" prefWidth="246.0" promptText="Password" />
@@ -67,6 +67,6 @@
             <Font size="11.0" />
          </font>
       </Label>
-      <DatePicker layoutX="324.0" layoutY="189.0" opacity="0.5" prefHeight="26.0" prefWidth="246.0" promptText="Date of Birth" />
+      <DatePicker fx:id="dobField" layoutX="324.0" layoutY="189.0" opacity="0.5" prefHeight="26.0" prefWidth="246.0" promptText="Date of Birth" />
    </children>
 </AnchorPane>
