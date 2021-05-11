@@ -35,6 +35,8 @@ public class myaccountController implements Initializable {
     private Button aboutusBtn;
     @FXML
     private Button logoutBtn;
+    @FXML
+    private Button appointmentBtn;
 
 
 
@@ -88,5 +90,12 @@ public class myaccountController implements Initializable {
 
         Stage window = (Stage) logoutBtn.getScene().getWindow();
         window.setScene(new Scene(root, 520, 400));
+    }
+    public void handleAppointmentBtn() throws Exception {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/appointment.fxml"));
+
+        Stage window = (Stage) appointmentBtn.getScene().getWindow();
+        window.setScene(new Scene(root, 725, 625));
     }
 }

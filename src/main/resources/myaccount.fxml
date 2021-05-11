@@ -27,7 +27,7 @@
                   <Image url="@../../../images/searchicon.png" />
                </image>
             </ImageView>
-            <Button layoutX="577.0" layoutY="22.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="187.0" style="-fx-background-color: #045D1B;" text="Online Appointment" textFill="#40bf64">
+            <Button fx:id="appointmentBtn" layoutX="577.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleAppointmentBtn" prefHeight="67.0" prefWidth="187.0" style="-fx-background-color: #045D1B;" text="Online Appointment" textFill="#40bf64">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
