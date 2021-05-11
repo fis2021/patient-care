@@ -6,7 +6,7 @@ abstract class user {
     public String fname;
     public String lname;
     public String username;
-    public String mail;
+    public String email;
     public String number;
     public String password;
     public String gender;
@@ -15,7 +15,7 @@ abstract class user {
         this.fname = name;
         this.lname = lname;
         this.username = username;
-        this.mail = mail;
+        this.email = mail;
         this.password = password;
         this.number = number;
         this.gender = gender;

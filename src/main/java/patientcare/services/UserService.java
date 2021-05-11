@@ -1,5 +1,7 @@
 package patientcare.services;
 import com.mongodb.*;
+import patientcare.exceptions.MailExists;
+import patientcare.exceptions.UsernameExists;
 import patientcare.users.patient;
 
 import java.util.Base64;
@@ -40,7 +42,32 @@ public class UserService {
 
     }
 
-    public static void checkExistingUsername(String username) throws
+    public static void checkExistingUsername(String username) throws UsernameExists{
+        DBObject query = new BasicDBObject("username", username);
+        DBCursor cursorPatient = patientCollection.find(query);
+        DBCursor cursorDoctor = doctorCollection.find(query);
+        if(cursorPatient.one() != null)
+        {
+            throw new UsernameExists(username);
+        }
+        if(cursorDoctor.one() != null){
+            throw new UsernameExists(username);
+        }
+    }
+
+    public static void checkExistingMail(String mail) throws MailExists{
+        DBObject query = new BasicDBObject("email", mail);
+        DBCursor cursorPatient = patientCollection.find(query);
+        DBCursor cursorDoctor = doctorCollection.find(query);
+        if(cursorPatient.one() != null)
+        {
+            throw new MailExists(mail);
+        }
+        if(cursorDoctor.one() != null){
+            throw new MailExists(mail);
+        }
+    }
+
     public static void addPatient (String fname, String lname, String mobilenum, String dob, String username, String password, String email, String gender){
         BasicDBObject user = new BasicDBObject();
         user.put("fname", fname);

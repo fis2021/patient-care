@@ -95,6 +95,7 @@ public class patientRegisterController implements Initializable {
             registrationLabelMessage.setText("");
         }
     }
+
     public void registerUser (){
         String gender="";
 
