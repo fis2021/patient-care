@@ -2,7 +2,7 @@ package patientcare.users;
 
 import java.util.Date;
 
-abstract class user {
+public abstract class user {
     public String fname;
     public String lname;
     public String username;

@@ -55,8 +55,11 @@ public class loginController implements Initializable {
 
         loginMessageLabel.setText("You try to login");
          if(usernameTextField.getText().isEmpty() == false && enterPasswordField.getText().isEmpty() == false) {
-             if (UserService.validateLogin(usernameTextField.getText(),enterPasswordField.getText()) == 1 ){
+             if (UserService.validateLogin(usernameTextField.getText(),enterPasswordField.getText())){
                     loginMessageLabel.setText("Login Successful");
+             }
+             else{
+                 loginMessageLabel.setText("Incorrect credentials!");
              }
          } else {
              loginMessageLabel.setText("Please enter username and password.");

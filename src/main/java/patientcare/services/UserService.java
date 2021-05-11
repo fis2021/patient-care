@@ -2,16 +2,19 @@ package patientcare.services;
 import com.mongodb.*;
 import patientcare.exceptions.MailExists;
 import patientcare.exceptions.UsernameExists;
+import patientcare.users.doctor;
 import patientcare.users.patient;
+import patientcare.users.user;
 
 import java.util.Base64;
+import java.util.Date;
 
 public class UserService {
 
     private static MongoClient mongoClient;
     private static DBCollection doctorCollection;
     private static DBCollection patientCollection;
-    private static patient loggedUser;
+    private static user loggedUser;
     private static DB database;
 
     public static void Initialize(){
@@ -103,24 +106,38 @@ public class UserService {
         patientCollection.drop();
     }
 
-    public static int validateLogin (String username,String password) {
+    public static boolean validateLogin (String username,String password) {
         DBObject obj = new BasicDBObject("username",username);
         obj.put("password",encodePassword(password));
         DBCursor cursorPatient = patientCollection.find(obj);
         DBCursor cursorDoctor = doctorCollection.find(obj);
 
         if(cursorPatient.one() != null){
-           /**//* UserService.loggedUser = new BasicDBObject(
-                    (String)cursorPatient.one().get("")
-            )*/
+            UserService.loggedUser = new patient(
+                    (String)cursorPatient.one().get("fname"),
+                    (String)cursorPatient.one().get("lname"),
+                    (String)cursorPatient.one().get("username"),
+                    (String)cursorPatient.one().get("email"),
+                    (String)cursorPatient.one().get("password"),
+                    (String)cursorPatient.one().get("mobilenum"),
+                    (String)cursorPatient.one().get("gender"),
+                    (Date)cursorPatient.one().get("DOB"));
+
+            return true;
         }
-        if(patientCollection.find(obj) != null){
-            return 1;
+        if(cursorDoctor.one() != null ){
+            UserService.loggedUser = new doctor(
+                    (String)cursorPatient.one().get("fname"),
+                    (String)cursorPatient.one().get("lname"),
+                    (String)cursorPatient.one().get("username"),
+                    (String)cursorPatient.one().get("email"),
+                    (String)cursorPatient.one().get("password"),
+                    (String)cursorPatient.one().get("mobilenum"),
+                    (String)cursorPatient.one().get("gender"),
+                    (String)cursorPatient.one().get("spec"));
+            return true;
         }
-        if(doctorCollection.find(obj) != null) {
-            return 1;
-        }
-        return 0;
+     return false;
     }
 
     public static String encodePassword(String password){
