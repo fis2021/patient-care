@@ -33,7 +33,7 @@
             <Label layoutX="24.0" layoutY="122.0" textFill="#045d1b" />
             <TextField fx:id="usernameTextField" layoutX="96.0" layoutY="117.0" opacity="0.5" prefHeight="26.0" prefWidth="173.0" promptText="Username" />
             <Label layoutX="23.0" layoutY="167.0" text="Password" textFill="#045d1b" />
-            <Button fx:id="loginButton" layoutX="48.0" layoutY="250.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="26.0" prefWidth="194.0" style="-fx-background-color: #AEB5AF;" text="Login" textOverrun="WORD_ELLIPSIS">
+            <Button fx:id="loginButton" layoutX="48.0" layoutY="250.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="35.0" prefWidth="194.0" style="-fx-background-color: #AEB5AF; -fx-background-radius: 5em;" text="Login" textFill="#045d1b" textOverrun="WORD_ELLIPSIS">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
@@ -42,7 +42,7 @@
             <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="23.0" layoutY="219.0" prefHeight="18.0" prefWidth="253.0" text="Invalid login. Please try again!" textFill="#b91206" />
             <PasswordField fx:id="enterPasswordField" layoutX="94.0" layoutY="163.0" opacity="0.5" prefHeight="26.0" prefWidth="177.0" promptText="Password" />
             <Button fx:id="returnButton" layoutX="242.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnButtonOnAction" style="-fx-background-color: #40BF64;" text="&lt;-" textFill="#045d1b" />
-            <Button fx:id="newaccountBtn" layoutX="48.0" layoutY="293.0" mnemonicParsing="false" onAction="#newAccountButtonOnAction" prefHeight="26.0" prefWidth="194.0" style="-fx-background-color: #AEB5AF;" text="I don't have an account" textOverrun="WORD_ELLIPSIS">
+            <Button fx:id="newaccountBtn" layoutX="48.0" layoutY="293.0" mnemonicParsing="false" onAction="#newAccountButtonOnAction" prefHeight="35.0" prefWidth="194.0" style="-fx-background-color: #AEB5AF; -fx-background-radius: 5em;" text="I don't have an account" textFill="#045d1b" textOverrun="WORD_ELLIPSIS">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>

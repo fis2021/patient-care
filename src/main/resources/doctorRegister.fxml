@@ -34,8 +34,8 @@
       <Label layoutX="39.0" layoutY="169.0" text="Last Name" textFill="#045d1b" />
       <TextField fx:id="lnameTextField" layoutX="39.0" layoutY="189.0" opacity="0.5" prefHeight="26.0" prefWidth="245.0" promptText="Last Name" />
       <TextField fx:id="usernameTextField" layoutX="39.0" layoutY="244.0" opacity="0.5" prefHeight="26.0" prefWidth="245.0" promptText="Username" />
-      <Button fx:id="registerButton" layoutX="138.0" layoutY="382.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="26.0" prefWidth="331.0" style="-fx-background-color: #40BF64;" text="Register" textFill="#045d1b" />
-      <Button fx:id="cancelButton" layoutX="138.0" layoutY="417.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="26.0" prefWidth="331.0" style="-fx-background-color: #40BF64;" text="Close" textFill="#045d1b" />
+      <Button fx:id="registerButton" layoutX="138.0" layoutY="382.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="26.0" prefWidth="331.0" style="-fx-background-color: #40BF64; -fx-background-radius: 5em;" text="Register" textFill="#045d1b" />
+      <Button fx:id="cancelButton" layoutX="138.0" layoutY="417.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="26.0" prefWidth="331.0" style="-fx-background-color: #40BF64; -fx-background-radius: 5em;" text="Close" textFill="#045d1b" />
       <Label layoutX="39.0" layoutY="224.0" text="Username" textFill="#045d1b" />
       <TextField fx:id="emailTextField" layoutX="39.0" layoutY="299.0" opacity="0.5" prefHeight="26.0" prefWidth="245.0" promptText="E-mail" />
       <Label layoutX="39.0" layoutY="279.0" text="E-mail" textFill="#045d1b" />
