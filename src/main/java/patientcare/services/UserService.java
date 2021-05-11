@@ -32,6 +32,7 @@ public class UserService {
     }
     public static void addDoctor(String fname, String lname, String mobilenum, String spec, String username, String password, String email, String gender){
         BasicDBObject user = new BasicDBObject();
+        password = encodePassword(password);
         user.put("fname", fname);
         user.put("lname", lname);
         user.put("mobilenum", mobilenum);
@@ -73,6 +74,7 @@ public class UserService {
 
     public static void addPatient (String fname, String lname, String mobilenum, String dob, String username, String password, String email, String gender){
         BasicDBObject user = new BasicDBObject();
+        password = encodePassword(password);
         user.put("fname", fname);
         user.put("lname", lname);
         user.put("mobilenum", mobilenum);
