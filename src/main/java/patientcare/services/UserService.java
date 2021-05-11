@@ -68,4 +68,17 @@ public class UserService {
         doctorCollection.drop();
         patientCollection.drop();
     }
+
+    public static int validateLogin (String username,String password) {
+        DBObject obj = new BasicDBObject();
+        obj.put("username",username);
+        obj.put("password",password);
+        if(patientCollection.find(obj) != null){
+            return 1;
+        }
+        if(doctorCollection.find(obj) != null) {
+            return 1;
+        }
+        return 0;
+    }
 }

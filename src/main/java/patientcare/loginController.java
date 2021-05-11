@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import patientcare.services.UserService;
 
 
 import java.io.File;
@@ -54,7 +55,9 @@ public class loginController implements Initializable {
 
         loginMessageLabel.setText("You try to login");
          if(usernameTextField.getText().isEmpty() == false && enterPasswordField.getText().isEmpty() == false) {
-             //validateLogin();
+             if (UserService.validateLogin(usernameTextField.getText(),enterPasswordField.getText()) == 1 ){
+                    loginMessageLabel.setText("Login Successful");
+             }
          } else {
              loginMessageLabel.setText("Please enter username and password.");
          }
@@ -75,6 +78,7 @@ public class loginController implements Initializable {
         Stage window = (Stage) newaccountBtn.getScene().getWindow();
         window.setScene(new Scene(root, 280, 230));
     }
+
 }
 
 
