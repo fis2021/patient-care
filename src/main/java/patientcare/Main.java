@@ -6,13 +6,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import patientcare.services.AppointmentService;
 import patientcare.services.UserService;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/homepage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/myaccount.fxml"));
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(new Scene(root, 768, 574));
 
@@ -23,12 +24,16 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         UserService.Initialize();
+        AppointmentService.Initialize();
         launch(args);
 
-        UserService.printDoctors();
-        UserService.printPatients();
+        //UserService.printDoctors();
+        //UserService.printPatients();
+        AppointmentService.printAppointment();
 
-       // UserService.dropDB();
+
+        // UserService.dropDB();
+        // AppointmentService.dropDB();
     }
 
 }
