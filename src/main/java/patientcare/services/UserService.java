@@ -14,7 +14,7 @@ public class UserService {
     private static MongoClient mongoClient;
     private static DBCollection doctorCollection;
     private static DBCollection patientCollection;
-    private static user loggedUser;
+    public static user loggedUser;
     private static DB database;
 
     public static void Initialize(){
@@ -122,12 +122,11 @@ public class UserService {
                     (String)cursorPatient.one().get("email"),
                     (String)cursorPatient.one().get("password"),
                     (String)cursorPatient.one().get("mobilenum"),
-                    (String)cursorPatient.one().get("gender"),
-                    (Date)cursorPatient.one().get("DOB"));
+                    (String)cursorPatient.one().get("gender")
+                   );
 
             return true;
-        }
-        if(cursorDoctor.one() != null ){
+        }else if(cursorDoctor.one() != null ){
             UserService.loggedUser = new doctor(
                     (String)cursorPatient.one().get("fname"),
                     (String)cursorPatient.one().get("lname"),
@@ -135,8 +134,7 @@ public class UserService {
                     (String)cursorPatient.one().get("email"),
                     (String)cursorPatient.one().get("password"),
                     (String)cursorPatient.one().get("mobilenum"),
-                    (String)cursorPatient.one().get("gender"),
-                    (String)cursorPatient.one().get("spec"));
+                    (String)cursorPatient.one().get("gender"));
             return true;
         }
      return false;
