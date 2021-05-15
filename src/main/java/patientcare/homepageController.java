@@ -1,5 +1,12 @@
 package patientcare;
 
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,12 +14,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import patientcare.services.UserService;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class homepageController implements Initializable {
@@ -36,7 +50,18 @@ public class homepageController implements Initializable {
     @FXML
     private Button myaccountBtn;
 
+    @FXML
+    private TextField filterField;
+    @FXML
+    private TableView<Doctor> tableView;
+    @FXML
+    private TableColumn<Doctor,String> fname;
+    @FXML
+    private TableColumn<Doctor,String> lname;
+    @FXML
+    private TableColumn<Doctor,String> spec;
 
+    private final ObservableList<Doctor> dataList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,7 +81,60 @@ public class homepageController implements Initializable {
         Image nameImage = new Image(nameFile.toURI().toString());
         nameImageView.setImage(nameImage);
 
+
+        fname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        spec.setCellValueFactory(new PropertyValueFactory<>("spec"));
+
+
+
+        ArrayList<Doctor> doctori = new ArrayList<Doctor>();
+
+        DBCursor cursor = UserService.getDoctorCollection().find();
+        while(cursor.hasNext()){
+            DBObject currentCursor = cursor.next();
+            doctori.add(new Doctor(
+                    (String) currentCursor.get("fname"),
+                    (String) currentCursor.get("lname"),
+                    (String) currentCursor.get("spec")
+            ));
+        }
+
+        dataList.addAll(doctori);
+
+        FilteredList<Doctor> filteredData = new FilteredList<>(dataList, b -> true);
+
+        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(doctor -> {
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (doctor.getFirstName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                } else if (doctor.getLastName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                } else if (doctor.getSpec().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                    return true;
+                else
+                    return false;
+
+            });
+
+        });
+
+        SortedList<Doctor> sortedData = new SortedList<>(filteredData);
+
+        sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+
+        tableView.setItems(sortedData);
     }
+
+
+
     public void cancelButtonOnAction (ActionEvent event) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
