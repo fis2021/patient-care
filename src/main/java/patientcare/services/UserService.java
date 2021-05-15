@@ -24,7 +24,6 @@ public class UserService {
             //database.getCollection("users");
             doctorCollection = database.getCollection("Doctors");
             patientCollection = database.getCollection("Patients");
-
         } catch(Exception e)
         {
             System.out.println(e);
@@ -111,33 +110,57 @@ public class UserService {
     public static boolean validateLogin (String username,String password) {
         DBObject obj = new BasicDBObject("username",username);
         obj.put("password",encodePassword(password));
-        DBCursor cursorPatient = patientCollection.find(obj);
-        DBCursor cursorDoctor = doctorCollection.find(obj);
 
-        if(cursorPatient.one() != null){
-            UserService.loggedUser = new patient(
-                    (String)cursorPatient.one().get("fname"),
-                    (String)cursorPatient.one().get("lname"),
-                    (String)cursorPatient.one().get("username"),
-                    (String)cursorPatient.one().get("email"),
-                    (String)cursorPatient.one().get("password"),
-                    (String)cursorPatient.one().get("mobilenum"),
-                    (String)cursorPatient.one().get("gender")
-                   );
+        if(validatePatientLogin(obj) != null){
+            loggedUser = validatePatientLogin(obj);
+            return true;
+        }else if (validateDoctorLogin(obj) != null){
+            loggedUser = validateDoctorLogin(obj);
+            System.out.println(loggedUser);
+            return true;
 
-            return true;
-        }else if(cursorDoctor.one() != null ){
-            UserService.loggedUser = new doctor(
-                    (String)cursorPatient.one().get("fname"),
-                    (String)cursorPatient.one().get("lname"),
-                    (String)cursorPatient.one().get("username"),
-                    (String)cursorPatient.one().get("email"),
-                    (String)cursorPatient.one().get("password"),
-                    (String)cursorPatient.one().get("mobilenum"),
-                    (String)cursorPatient.one().get("gender"));
-            return true;
         }
+
+
      return false;
+    }
+
+    public static patient validatePatientLogin(DBObject obj){
+        DBCursor cursor = patientCollection.find(obj);
+        if(cursor.one() == null){
+            return null;
+        }
+
+        return new patient(
+                (String)cursor.one().get("fname"),
+                (String)cursor.one().get("lname"),
+                (String)cursor.one().get("username"),
+                (String)cursor.one().get("email"),
+                (String)cursor.one().get("password"),
+                (String)cursor.one().get("mobilenum"),
+                (String)cursor.one().get("gender"),
+                true,
+                (String)cursor.one().get("DOB")
+        );
+    }
+
+    public static doctor validateDoctorLogin(DBObject obj){
+        DBCursor cursor = doctorCollection.find(obj);
+        if(cursor.one() == null){
+            return null;
+        }
+
+        return new doctor(
+                (String)cursor.one().get("fname"),
+                (String)cursor.one().get("lname"),
+                (String)cursor.one().get("username"),
+                (String)cursor.one().get("email"),
+                (String)cursor.one().get("password"),
+                (String)cursor.one().get("mobilenum"),
+                (String)cursor.one().get("gender"),
+                true,
+                (String)cursor.one().get("spec"));
+
     }
 
     public static String encodePassword(String password){

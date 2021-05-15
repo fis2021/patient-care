@@ -10,8 +10,9 @@ public abstract class user {
     public String number;
     public String password;
     public String gender;
+    public boolean logged ;
 
-    public user(String name,String lname,String username, String mail, String password, String number, String gender) {
+    public user(String name,String lname,String username, String mail, String password, String number, String gender,boolean logged) {
         this.fname = name;
         this.lname = lname;
         this.username = username;
@@ -19,6 +20,7 @@ public abstract class user {
         this.password = password;
         this.number = number;
         this.gender = gender;
+        this.logged = logged;
 
     }
 
