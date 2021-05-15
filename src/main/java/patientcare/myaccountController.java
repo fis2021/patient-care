@@ -1,5 +1,9 @@
 package patientcare;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +11,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -26,9 +34,7 @@ public class myaccountController implements Initializable {
     @FXML
     private Button cancelButton;
     @FXML
-    private Button specializationsBtn;
-    @FXML
-    private Button doctorsBtn;
+    private ImageView searchImageView;
     @FXML
     private Button aboutusBtn;
     @FXML
@@ -38,6 +44,18 @@ public class myaccountController implements Initializable {
     @FXML
     private Button reviewBtn;
 
+    @FXML
+    private TextField filterField;
+    @FXML
+    private TableView<Doctor> tableView;
+    @FXML
+    private TableColumn<Doctor,String> fname;
+    @FXML
+    private TableColumn<Doctor,String> lname;
+    @FXML
+    private TableColumn<Doctor,String> spec;
+
+    private final ObservableList<Doctor> dataList = FXCollections.observableArrayList();
 
 
     @Override
@@ -54,12 +72,59 @@ public class myaccountController implements Initializable {
         Image nameImage = new Image(nameFile.toURI().toString());
         nameImageView.setImage(nameImage);
 
+        File searchFile = new File("images/searchicon.png");
+        Image searchImage = new Image(searchFile.toURI().toString());
+        searchImageView.setImage(searchImage);
+
+
+        fname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        spec.setCellValueFactory(new PropertyValueFactory<>("spec"));
+
+        Doctor dr1 = new Doctor("Andreea", "Mihai", "Chirurg");
+        Doctor dr2 = new Doctor("Maria", "Mihai", "Oftalmolog");
+        Doctor dr3 = new Doctor("Paula", "Mihai", "Dermatolog");
+        Doctor dr4= new Doctor("Paula", "Mihai", "Estetician");
+
+        dataList.addAll(dr1, dr2,dr3,dr4);
+
+        FilteredList<Doctor> filteredData = new FilteredList<>(dataList, b -> true);
+
+        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(doctor -> {
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (doctor.getFirstName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                } else if (doctor.getLastName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                } else if (doctor.getSpec().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                    return true;
+                else
+                    return false;
+
+            });
+
+        });
+
+        SortedList<Doctor> sortedData = new SortedList<>(filteredData);
+
+        sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+
+        tableView.setItems(sortedData);
+
+
     }
     public void cancelButtonOnAction (ActionEvent event) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
-    public void handleSpecializationsBtn() throws Exception {
+   /* public void handleSpecializationsBtn() throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("/specializations.fxml"));
 
@@ -73,6 +138,8 @@ public class myaccountController implements Initializable {
         Stage window = (Stage) doctorsBtn.getScene().getWindow();
         window.setScene(new Scene(root, 400, 400));
     }
+
+    */
     public void handleReviewBtn() throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("/review.fxml"));
