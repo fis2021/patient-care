@@ -15,6 +15,7 @@ public class Doctor {
 
     }
     public String getFirstName() {
+
         return firstName.get();
     }
     public void setFirstName(String fName) {
@@ -22,16 +23,20 @@ public class Doctor {
     }
 
     public String getLastName() {
+
         return lastName.get();
     }
     public void setLastName(String lName) {
-       lastName.set(lName);
+
+        lastName.set(lName);
     }
 
     public String getSpec() {
+
         return spec.get();
     }
     public void setSpec(String Spec) {
+
         spec.set(Spec);
     }
 

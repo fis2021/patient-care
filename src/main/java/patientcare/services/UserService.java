@@ -14,9 +14,17 @@ public class UserService {
     private static MongoClient mongoClient;
     private static DBCollection doctorCollection;
     private static DBCollection patientCollection;
+
+    private static DBCollection reviewCollection;
+
+
     public static user loggedUser;
     private static DB database;
 
+    public static DBCollection getReviewCollection(){
+        return UserService.reviewCollection;
+    }
+  
     public static DBCollection getDoctorCollection(){
         return UserService.doctorCollection;
     }
@@ -28,11 +36,26 @@ public class UserService {
             //database.getCollection("users");
             doctorCollection = database.getCollection("Doctors");
             patientCollection = database.getCollection("Patients");
+
+            reviewCollection = database.getCollection("Reviews");
         } catch(Exception e)
         {
             System.out.println(e);
         }
+
+
     }
+    public static void addReview (String  review){
+        BasicDBObject userReview = new BasicDBObject();
+
+        //userReview.put("fname", fname);
+       // userReview.put("lname", lname);
+        userReview.put("review", review);
+
+        reviewCollection.insert(userReview);
+
+    }
+
     public static void addDoctor(String fname, String lname, String mobilenum, String spec, String username, String password, String email, String gender){
         BasicDBObject user = new BasicDBObject();
         password = encodePassword(password);
@@ -90,6 +113,16 @@ public class UserService {
         patientCollection.insert(user);
     }
 
+
+    public static void printReview(){
+        DBCursor cursor = reviewCollection.find();
+        while(cursor.hasNext())
+        {
+            System.out.println(cursor.next());
+            System.out.println();
+        }
+    }
+
     public static void printDoctors(){
         DBCursor cursor = doctorCollection.find();
         while(cursor.hasNext())
@@ -106,9 +139,11 @@ public class UserService {
             System.out.println();
         }
     }
+
     public static void dropDB () {
         doctorCollection.drop();
         patientCollection.drop();
+        reviewCollection.drop();
     }
 
     public static boolean validateLogin (String username,String password) {
