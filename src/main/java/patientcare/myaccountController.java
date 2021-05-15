@@ -168,16 +168,20 @@ public class myaccountController implements Initializable {
     }
     public void handleLogoutBtn() throws Exception {
         //to do
+        UserService.loggedUser = null;
         Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
 
         Stage window = (Stage) logoutBtn.getScene().getWindow();
         window.setScene(new Scene(root, 520, 400));
     }
     public void handleAppointmentBtn() throws Exception {
+        if(tableView.getSelectionModel().getSelectedItem()  != null ) {
+            Parent root = FXMLLoader.load(getClass().getResource("/appointment.fxml"));
 
-        Parent root = FXMLLoader.load(getClass().getResource("/appointment.fxml"));
+            Stage window = (Stage) appointmentBtn.getScene().getWindow();
+            window.setScene(new Scene(root, 725, 625));
+        }
 
-        Stage window = (Stage) appointmentBtn.getScene().getWindow();
-        window.setScene(new Scene(root, 725, 625));
+
     }
 }
