@@ -68,7 +68,7 @@ public class appointmentController implements Initializable {
     }
     public void registerAppointment (String hour){
 
-        AppointmentService.addAppointment(dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),hour);
+        AppointmentService.addAppointment("",dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),hour);
 
 
     }
