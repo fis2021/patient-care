@@ -22,8 +22,6 @@ public class myaccountController implements Initializable {
     @FXML
     private ImageView logoImageView;
     @FXML
-    private ImageView searchImageView;
-    @FXML
     private ImageView nameImageView;
     @FXML
     private Button cancelButton;
@@ -37,6 +35,8 @@ public class myaccountController implements Initializable {
     private Button logoutBtn;
     @FXML
     private Button appointmentBtn;
+    @FXML
+    private Button reviewBtn;
 
 
 
@@ -49,10 +49,6 @@ public class myaccountController implements Initializable {
         File logoFile = new File("images/logo.png");
         Image logoImage = new Image(logoFile.toURI().toString());
         logoImageView.setImage(logoImage);
-
-        File searchFile = new File("images/searchicon.png");
-        Image searchImage = new Image(searchFile.toURI().toString());
-        searchImageView.setImage(searchImage);
 
         File nameFile = new File("images/scris.png");
         Image nameImage = new Image(nameFile.toURI().toString());
@@ -77,6 +73,14 @@ public class myaccountController implements Initializable {
         Stage window = (Stage) doctorsBtn.getScene().getWindow();
         window.setScene(new Scene(root, 400, 400));
     }
+    public void handleReviewBtn() throws Exception {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/review.fxml"));
+
+        Stage window = (Stage) reviewBtn.getScene().getWindow();
+        window.setScene(new Scene(root, 520, 365));
+    }
+
     public void handleAboutUsBtn() throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("/aboutus.fxml"));

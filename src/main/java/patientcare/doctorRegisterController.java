@@ -11,6 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import patientcare.exceptions.MailExists;
+import patientcare.exceptions.UsernameExists;
+import patientcare.exceptions.emptyTextFieldExceptions;
 import patientcare.services.UserService;
 
 import java.io.File;
@@ -77,23 +80,31 @@ public class doctorRegisterController implements Initializable {
     }
 
     public void registerButtonOnAction (ActionEvent event) throws InterruptedException, IOException {
+        try {
+            this.emptyTextField();
+            UserService.checkExistingMail(emailTextField.getText());
+            UserService.checkExistingUsername(usernameTextField.getText());
 
-        if (setPasswordField.getText().equals(confirmPasswordField.getText())) {
-            registerUser();
-            confirmPasswordLabel.setText("");
-            registrationLabelMessage.setText("User has been registered successfully!");
+            if (setPasswordField.getText().equals(confirmPasswordField.getText())) {
+                registerUser();
+                confirmPasswordLabel.setText("");
+                registrationLabelMessage.setText("User has been registered successfully!");
 
-            Thread.sleep(1500);
+                Thread.sleep(1500);
 
-            Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
 
-            Stage window = (Stage) registerButton.getScene().getWindow();
-            window.setScene(new Scene(root, 520, 400));
+                Stage window = (Stage) registerButton.getScene().getWindow();
+                window.setScene(new Scene(root, 520, 400));
 
-        } else
-            confirmPasswordLabel.setText("Password does not match");
-        if(fnameTextField.getText().isBlank() || lnameTextField.getText().isBlank() ||  usernameTextField.getText().isBlank() || emailTextField.getText().isBlank() || pnTextField.getText().isBlank() || specializationTextField.getText().isBlank()) {
-            registrationLabelMessage.setText("");
+            } else
+                confirmPasswordLabel.setText("Password does not match");
+        }catch (emptyTextFieldExceptions  e){
+            registrationLabelMessage.setText(e.getMessage());
+        }catch(MailExists me){
+            registrationLabelMessage.setText(me.getMessage());
+        }catch(UsernameExists ue){
+            registrationLabelMessage.setText(ue.getMessage());
         }
     }
     public void registerUser (){
@@ -102,7 +113,17 @@ public class doctorRegisterController implements Initializable {
         else if(genderF.isSelected()) gender="Female";
         else if(genderO.isSelected()) gender="Other";
         UserService.addDoctor(fnameTextField.getText(), lnameTextField.getText(), pnTextField.getText(), specializationTextField.getText(),usernameTextField.getText(),setPasswordField.getText(),emailTextField.getText(), gender);
+    }
 
-
+    public void emptyTextField() throws emptyTextFieldExceptions {
+        if(             fnameTextField.getText().equals("") ||
+                        lnameTextField.getText().equals("") ||
+                        pnTextField.getText().equals("") ||
+                        specializationTextField.getText().equals("") ||
+                        usernameTextField.getText().equals("")||
+                        setPasswordField.getText().equals("")||
+                        emailTextField.getText().equals("")){
+            throw new emptyTextFieldExceptions();
+        }
     }
 }
