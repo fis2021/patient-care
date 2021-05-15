@@ -36,6 +36,8 @@ public class appointmentController implements Initializable {
     private ImageView infoImageView;
     @FXML
     private DatePicker dateField;
+    @FXML
+    private Label appointmentStatus;
 
 
     @Override
@@ -63,13 +65,16 @@ public class appointmentController implements Initializable {
         stage.close();
     }
     public void buttonOnAction(ActionEvent event) {
-
-        registerAppointment(((Button)event.getSource()).getText());
+        if(AppointmentService.appointmentExists("",dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),((Button)event.getSource()).getText())){
+            appointmentStatus.setText("Appointment already exists");
+        }
+        //we need to add a function that stores the doctor name,after we select it from the list or id,idk
+        registerAppointment("",((Button)event.getSource()).getText());
     }
-    public void registerAppointment (String hour){
+    public void registerAppointment (String doctor,String hour){
 
         AppointmentService.addAppointment("",dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),hour);
-
+        appointmentStatus.setText("Success");
 
     }
 
