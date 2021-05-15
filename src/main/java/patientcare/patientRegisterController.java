@@ -101,7 +101,7 @@ public class patientRegisterController implements Initializable {
         if(genderM.isSelected()) gender="Male";
         else if(genderF.isSelected()) gender="Female";
         else if(genderO.isSelected()) gender="Other";
-        UserService.addPatient(fnameTextField.getText(), lnameTextField.getText(), pnTextField.getText(), dobField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) ,usernameTextField.getText(),setPasswordField.getText(),emailTextField.getText(), gender);
+        UserService.addPatient(fnameTextField.getText(), lnameTextField.getText(), pnTextField.getText(), dobField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) ,usernameTextField.getText(),setPasswordField.getText(),emailTextField.getText(),gender);
 
     }
 }

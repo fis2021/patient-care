@@ -12,7 +12,7 @@ public class AppointmentService {
             mongoClient = new MongoClient();
             database = mongoClient.getDB("UsersDB");
             //database.getCollection("users");
-            scheduleCollection = database.getCollection("Doctor's schedule");
+            scheduleCollection = database.getCollection("Schedule");
 
         } catch(Exception e)
         {
