@@ -1,5 +1,7 @@
 package patientcare;
 
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,9 +21,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import patientcare.services.UserService;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -82,12 +86,21 @@ public class homepageController implements Initializable {
         lname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         spec.setCellValueFactory(new PropertyValueFactory<>("spec"));
 
-        Doctor dr1 = new Doctor("Andreea", "Mihai", "Chirurg");
-        Doctor dr2 = new Doctor("Maria", "Mihai", "Oftalmolog");
-        Doctor dr3 = new Doctor("Paula", "Mihai", "Dermatolog");
-        Doctor dr4= new Doctor("Paula", "Mihai", "Estetician");
 
-        dataList.addAll(dr1, dr2,dr3,dr4);
+
+        ArrayList<Doctor> doctori = new ArrayList<Doctor>();
+
+        DBCursor cursor = UserService.getDoctorCollection().find();
+        while(cursor.hasNext()){
+            DBObject currentCursor = cursor.next();
+            doctori.add(new Doctor(
+                    (String) currentCursor.get("fname"),
+                    (String) currentCursor.get("lname"),
+                    (String) currentCursor.get("spec")
+            ));
+        }
+
+        dataList.addAll(doctori);
 
         FilteredList<Doctor> filteredData = new FilteredList<>(dataList, b -> true);
 

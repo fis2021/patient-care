@@ -24,6 +24,10 @@ public class UserService {
     public static DBCollection getReviewCollection(){
         return UserService.reviewCollection;
     }
+  
+    public static DBCollection getDoctorCollection(){
+        return UserService.doctorCollection;
+    }
 
     public static void Initialize(){
         try{
