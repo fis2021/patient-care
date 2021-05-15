@@ -47,6 +47,9 @@ public class myaccountController implements Initializable {
     private Button appointmentBtn;
     @FXML
     private Button reviewBtn;
+    @FXML
+    private Button infoBtn;
+
 
     @FXML
     private TextField filterField;
@@ -135,22 +138,15 @@ public class myaccountController implements Initializable {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
-   /* public void handleSpecializationsBtn() throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/specializations.fxml"));
+    public void handleInfoBtn() throws Exception {
 
-        Stage window = (Stage) specializationsBtn.getScene().getWindow();
-        window.setScene(new Scene(root, 400, 400));
-    }
-    public void handleDoctorsBtn() throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/info.fxml"));
 
-        Parent root = FXMLLoader.load(getClass().getResource("/doctors.fxml"));
-
-        Stage window = (Stage) doctorsBtn.getScene().getWindow();
-        window.setScene(new Scene(root, 400, 400));
+        Stage window = (Stage) infoBtn.getScene().getWindow();
+        window.setScene(new Scene(root, 710, 435));
     }
 
-    */
     public void handleReviewBtn() throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("/review.fxml"));

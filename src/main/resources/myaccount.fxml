@@ -54,7 +54,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="reviewBtn1" layoutX="14.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleReviewBtn" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: #AEB5AF;" text="Contact Info">
+            <Button fx:id="infoBtn" layoutX="14.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleInfoBtn" prefHeight="45.0" prefWidth="155.0" style="-fx-background-color: #AEB5AF;" text="Contact Info">
                <font>
                   <Font size="14.0" />
                </font>
