@@ -12,10 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,6 +36,10 @@ public class myaccountController implements Initializable {
     private Button cancelButton;
     @FXML
     private ImageView searchImageView;
+
+    @FXML
+    private Label alertTextField;
+
     @FXML
     private Button aboutusBtn;
     @FXML
@@ -176,10 +177,13 @@ public class myaccountController implements Initializable {
     }
     public void handleAppointmentBtn() throws Exception {
         if(tableView.getSelectionModel().getSelectedItem()  != null ) {
+            alertTextField.setText("");
             Parent root = FXMLLoader.load(getClass().getResource("/appointment.fxml"));
 
             Stage window = (Stage) appointmentBtn.getScene().getWindow();
             window.setScene(new Scene(root, 725, 625));
+        }else{
+            alertTextField.setText("You need to select a doctor!");
         }
 
 
