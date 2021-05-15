@@ -17,6 +17,10 @@ public class UserService {
     public static user loggedUser;
     private static DB database;
 
+    public static DBCollection getDoctorCollection(){
+        return UserService.doctorCollection;
+    }
+
     public static void Initialize(){
         try{
             mongoClient = new MongoClient();
