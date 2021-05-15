@@ -35,6 +35,8 @@
                   <Image url="@../../../images/info_icon.png" />
                </image>
             </ImageView>
+            <Label layoutX="10.0" layoutY="595.0" text="Appointment Status:" textFill="#40bf64" />
+            <Label fx:id="appointmentStatus" layoutX="136.0" layoutY="595.0" textFill="#40bf64" />
          </children>
       </AnchorPane>
    </left>
