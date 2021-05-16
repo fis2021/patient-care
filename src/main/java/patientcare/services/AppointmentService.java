@@ -9,6 +9,9 @@ public class AppointmentService {
     private static DBCollection scheduleCollection;
     private static DB database;
 
+    public static DBCollection getAppointmentCollection(){
+        return AppointmentService.scheduleCollection;
+    }
     public static void Initialize(){
         try{
             mongoClient = new MongoClient();

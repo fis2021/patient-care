@@ -1,5 +1,6 @@
 package patientcare;
 
+import com.mongodb.DBCollection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import patientcare.services.AppointmentService;
+import patientcare.services.UserService;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +35,6 @@ public class appointmentController implements Initializable {
     private DatePicker dateField;
     @FXML
     private Label appointmentStatus;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

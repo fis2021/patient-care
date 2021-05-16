@@ -1,5 +1,6 @@
 package patientcare;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import javafx.collections.FXCollections;
@@ -20,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import patientcare.services.AppointmentService;
 import patientcare.services.UserService;
 
 import java.io.File;
@@ -85,14 +87,19 @@ public class doctorAccountController implements Initializable {
 
         ArrayList<Patient> pacienti = new ArrayList<Patient>();
 
-        DBCursor cursor = UserService.getPatientCollection().find();
+        DBObject obj = new BasicDBObject("doctor",UserService.loggedUser.email);
+
+        DBCursor cursor = AppointmentService.getAppointmentCollection().find(obj);
         while(cursor.hasNext()){
-            DBObject currentCursor = cursor.next();
-           pacienti.add(new Patient(
-                    (String) currentCursor.get("fname"),
-                    (String) currentCursor.get("lname"),
-                    (String) currentCursor.get("email"),
-                    (String) currentCursor.get("mobilenum")
+            DBObject patients = new BasicDBObject("email", (String)cursor.one().get("patient"));
+            System.out.println(cursor.one());
+            DBCursor currentCursor =  UserService.getPatientCollection().find(patients);
+            System.out.println(currentCursor.one());
+            pacienti.add(new Patient(
+                    (String) currentCursor.one().get("fname"),
+                    (String) currentCursor.one().get("lname"),
+                    (String) currentCursor.one().get("email"),
+                    (String) currentCursor.one().get("mobilenum")
             ));
         }
 
