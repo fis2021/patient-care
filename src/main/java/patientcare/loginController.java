@@ -60,15 +60,18 @@ public class loginController implements Initializable {
              if (UserService.validateLogin(usernameTextField.getText(),enterPasswordField.getText())){
                  loginMessageLabel.setText("Login Successful");
                  if(UserService.loggedUser instanceof patientcare.users.patient) {
-                     //aici avem pagina pentru pacient
+                     Parent root = FXMLLoader.load(getClass().getResource("/patientAccount.fxml"));
+
+                     Stage window = (Stage) loginButton.getScene().getWindow();
+                     window.setScene(new Scene(root, 768, 574));
                  }
                  if (UserService.loggedUser instanceof patientcare.users.doctor){
-                     //aici pagina pentru doctor
-                 }
-               /*  Parent root = FXMLLoader.load(getClass().getResource("/myaccount.fxml"));
+                     Parent root = FXMLLoader.load(getClass().getResource("/doctorAccount.fxml"));
 
-                 Stage window = (Stage) loginButton.getScene().getWindow();
-                 window.setScene(new Scene(root, 768, 574));*/
+                     Stage window = (Stage) loginButton.getScene().getWindow();
+                     window.setScene(new Scene(root, 768, 574));
+                 }
+
              }
              else{
                  loginMessageLabel.setText("Incorrect credentials!");

@@ -11,19 +11,14 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import patientcare.services.AppointmentService;
-import patientcare.services.UserService;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class appointmentController implements Initializable {
@@ -55,7 +50,7 @@ public class appointmentController implements Initializable {
 
     public void returnButtonOnAction (ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/myaccount.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/patientAccount.fxml"));
 
         Stage window = (Stage) returnButton.getScene().getWindow();
         window.setScene(new Scene(root, 768, 574));

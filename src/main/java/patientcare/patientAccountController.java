@@ -27,7 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class myaccountController implements Initializable {
+public class patientAccountController implements Initializable {
 
     @FXML
     private ImageView mainImageView;
@@ -139,13 +139,6 @@ public class myaccountController implements Initializable {
         stage.close();
     }
 
-    public void handleInfoBtn() throws Exception {
-
-        Parent root = FXMLLoader.load(getClass().getResource("/info.fxml"));
-
-        Stage window = (Stage) infoBtn.getScene().getWindow();
-        window.setScene(new Scene(root, 710, 435));
-    }
 
     public void handleReviewBtn() throws Exception {
 

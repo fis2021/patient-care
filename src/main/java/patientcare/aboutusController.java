@@ -31,7 +31,7 @@ public class aboutusController implements Initializable {
     }
     public void returnButtonOnAction (ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/myaccount.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/patientAccount.fxml"));
 
         Stage window = (Stage) returnButton.getScene().getWindow();
         window.setScene(new Scene(root, 768, 574));

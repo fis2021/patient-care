@@ -18,7 +18,6 @@ import patientcare.services.UserService;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class reviewController implements Initializable {
@@ -46,7 +45,7 @@ public class reviewController implements Initializable {
     }
     public void returnButtonOnAction (ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/myaccount.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/patientAccount.fxml"));
 
         Stage window = (Stage) returnButton.getScene().getWindow();
         window.setScene(new Scene(root, 768, 574));
