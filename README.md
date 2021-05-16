@@ -61,4 +61,3 @@ If you managed to follow all the steps from the tutorial, you should also be abl
 The project has already been setup for Maven and Gradle according to the above link.
 To start and run the project use one of the following commands:
 * `mvn javafx:run` or `./mvnw javafx:run` (run the `run` goal of the `javafx` maven plugin)
-* `gradle run` or `./gradlew run` (to start the `run` task of the `org.openjfx.javafxplugin` plugin)
