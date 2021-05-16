@@ -17,7 +17,7 @@ public class AppointmentService {
     public static void Initialize(){
         try{
             mongoClient = new MongoClient();
-            database = mongoClient.getDB("UsersDB");
+            database = mongoClient.getDB("AppointmentsDB");
             //database.getCollection("users");
             scheduleCollection = database.getCollection("Schedule");
 
