@@ -1,5 +1,6 @@
 package patientcare;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import javafx.collections.FXCollections;
@@ -176,9 +177,12 @@ public class myaccountController implements Initializable {
         window.setScene(new Scene(root, 520, 400));
     }
     public void handleAppointmentBtn() throws Exception {
-        if(tableView.getSelectionModel().getSelectedItem()  != null ) {
+       var doctor = tableView.getSelectionModel().getSelectedItem();
+        if( doctor != null ) {
             alertTextField.setText("");
-            //appointmentController.class.setDoctorEmail()
+            appointmentController app =  new appointmentController();
+            app.setPatient_mail(UserService.loggedUser.email);
+            app.setDoctorEmail(getDoctorEmail(doctor));
             Parent root = FXMLLoader.load(getClass().getResource("/appointment.fxml"));
 
             Stage window = (Stage) appointmentBtn.getScene().getWindow();
@@ -186,7 +190,18 @@ public class myaccountController implements Initializable {
         }else{
             alertTextField.setText("You need to select a doctor!");
         }
+    }
 
+
+    public String getDoctorEmail(Doctor doctor) {
+        DBObject obj = new BasicDBObject("fname",doctor.getFirstName());
+        obj.put("lname",doctor.getLastName());
+        obj.put("spec",doctor.getSpec());
+        DBCursor cursor = UserService.getDoctorCollection().find(obj);
+        if(cursor.one() != null){
+            return (String)cursor.one().get("email");
+        }
+        return "";
 
     }
 }

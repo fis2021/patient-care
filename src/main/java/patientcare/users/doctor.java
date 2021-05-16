@@ -6,4 +6,6 @@ public class doctor extends user{
         super(name, lname, username, email, password, number, gender,logged);
         this.spec = spec;
     }
+
+
 }
