@@ -62,6 +62,7 @@ public class loginController implements Initializable {
                  if(UserService.loggedUser instanceof patientcare.users.patient) {
                      Parent root = FXMLLoader.load(getClass().getResource("/patientAccount.fxml"));
 
+
                      Stage window = (Stage) loginButton.getScene().getWindow();
                      window.setScene(new Scene(root, 768, 574));
                  }

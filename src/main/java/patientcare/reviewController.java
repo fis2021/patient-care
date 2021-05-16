@@ -1,5 +1,6 @@
 package patientcare;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,11 +9,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import patientcare.services.AppointmentService;
 import patientcare.services.UserService;
 
 import java.io.File;
@@ -30,6 +33,8 @@ public class reviewController implements Initializable {
     private ImageView logoImageView;
     @FXML
     private Button returnButton;
+    @FXML
+    private Label reviewStatus;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -37,7 +42,9 @@ public class reviewController implements Initializable {
         Image logoImage = new Image(logoFile.toURI().toString());
         logoImageView.setImage(logoImage);
 
-        DBCursor cursor = UserService.getReviewCollection().find();
+        BasicDBObject review = new BasicDBObject();
+        review.put("doctor",UserService.doctor_mail_for_appointment);
+        DBCursor cursor = UserService.getReviewCollection().find(review);
         while(cursor.hasNext()){
             reviewTextArea.appendText((String) cursor.next().get("review")+"\n");
         }
@@ -52,19 +59,12 @@ public class reviewController implements Initializable {
     }
 
 
-    public void submitButtonOnAction (ActionEvent event) {
+    public void submitButtonOnAction (ActionEvent event) throws IOException{
         String review = reviewTextField.getText();
-        String fname, lname;
-        fname = UserService.loggedUser.fname;
-        lname = UserService.loggedUser.lname;
+        UserService.addReview(review,UserService.loggedUser.email,UserService.doctor_mail_for_appointment);
+        reviewStatus.setText("Thanks for your review!");
 
-
-
-        reviewTextArea.appendText(fname + " "+ lname+ ": " +"\n "+ review);
-
-        UserService.addReview(fname + " "+ lname+ ": " +"\n "+reviewTextField.getText());
-
-
-
+        reviewTextField.setText("");
+        reviewTextArea.appendText(review + "\n");
     }
  }

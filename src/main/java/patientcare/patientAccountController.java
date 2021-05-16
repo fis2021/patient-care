@@ -1,5 +1,6 @@
 package patientcare;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import javafx.collections.FXCollections;
@@ -12,14 +13,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import patientcare.services.AppointmentService;
 import patientcare.services.UserService;
 
 import java.io.File;
@@ -39,6 +38,10 @@ public class patientAccountController implements Initializable {
     private Button cancelButton;
     @FXML
     private ImageView searchImageView;
+
+    @FXML
+    private Label alertTextField;
+
     @FXML
     private Button aboutusBtn;
     @FXML
@@ -153,11 +156,22 @@ public class patientAccountController implements Initializable {
 
 
     public void handleReviewBtn() throws Exception {
+        var doctor = tableView.getSelectionModel().getSelectedItem();
+        if( doctor != null ) {
+            if (!AppointmentService.appointmentExistsByPatientAndDoctor(UserService.loggedUser.email, getDoctorEmail(doctor))) {
+                alertTextField.setText("You should have at least one appointment to leave a review!");
+            } else {
+                alertTextField.setText("");
+                UserService.doctor_mail_for_appointment = getDoctorEmail(doctor);
+                Parent root = FXMLLoader.load(getClass().getResource("/review.fxml"));
 
-        Parent root = FXMLLoader.load(getClass().getResource("/review.fxml"));
+                Stage window = (Stage) reviewBtn.getScene().getWindow();
+                window.setScene(new Scene(root, 520, 365));
+            }
+        }else {
+            alertTextField.setText("You need to select a doctor!");
+        }
 
-        Stage window = (Stage) reviewBtn.getScene().getWindow();
-        window.setScene(new Scene(root, 520, 365));
     }
 
     public void handleAboutUsBtn() throws Exception {
@@ -169,16 +183,35 @@ public class patientAccountController implements Initializable {
     }
     public void handleLogoutBtn() throws Exception {
         //to do
+        UserService.loggedUser = null;
         Parent root = FXMLLoader.load(getClass().getResource("/homepage.fxml"));
-
         Stage window = (Stage) logoutBtn.getScene().getWindow();
         window.setScene(new Scene(root, 768, 574));
     }
     public void handleAppointmentBtn() throws Exception {
+       var doctor = tableView.getSelectionModel().getSelectedItem();
+        if( doctor != null ) {
+            alertTextField.setText("");
+            UserService.doctor_mail_for_appointment = getDoctorEmail(doctor);
+            Parent root = FXMLLoader.load(getClass().getResource("/appointment.fxml"));
 
-        Parent root = FXMLLoader.load(getClass().getResource("/appointment.fxml"));
+            Stage window = (Stage) appointmentBtn.getScene().getWindow();
+            window.setScene(new Scene(root, 725, 625));
+        }else{
+            alertTextField.setText("You need to select a doctor!");
+        }
+    }
 
-        Stage window = (Stage) appointmentBtn.getScene().getWindow();
-        window.setScene(new Scene(root, 725, 625));
+
+    public String getDoctorEmail(Doctor doctor) {
+        DBObject obj = new BasicDBObject("fname",doctor.getFirstName());
+        obj.put("lname",doctor.getLastName());
+        obj.put("spec",doctor.getSpec());
+        DBCursor cursor = UserService.getDoctorCollection().find(obj);
+        if(cursor.one() != null){
+            return (String)cursor.one().get("email");
+        }
+        return "";
+
     }
 }

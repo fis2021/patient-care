@@ -48,7 +48,6 @@ public class appointmentController implements Initializable {
         dateField.setValue(date);
     }
 
-
     public void returnButtonOnAction (ActionEvent event) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("/patientAccount.fxml"));
@@ -56,20 +55,25 @@ public class appointmentController implements Initializable {
         Stage window = (Stage) returnButton.getScene().getWindow();
         window.setScene(new Scene(root, 768, 574));
     }
+
     public void cancelButtonOnAction (ActionEvent event) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
-    public void buttonOnAction(ActionEvent event) {
-        if(AppointmentService.appointmentExists("",dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),((Button)event.getSource()).getText())){
-            appointmentStatus.setText("Appointment already exists");
-        }
-        //we need to add a function that stores the doctor name,after we select it from the list or id,idk
-        registerAppointment("",((Button)event.getSource()).getText());
-    }
-    public void registerAppointment (String doctor,String hour){
 
-        AppointmentService.addAppointment("",dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),hour);
+    public void buttonOnAction(ActionEvent event) {
+        if(AppointmentService.appointmentExists(UserService.doctor_mail_for_appointment,dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),((Button)event.getSource()).getText())){
+            appointmentStatus.setText("Appointment already exists");
+
+        }else{
+            registerAppointment(((Button)event.getSource()).getText());
+        }
+
+    }
+
+    public void registerAppointment (String hour){
+
+        AppointmentService.addAppointment(UserService.doctor_mail_for_appointment,UserService.loggedUser.email,dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),hour);
         appointmentStatus.setText("Success");
 
     }
