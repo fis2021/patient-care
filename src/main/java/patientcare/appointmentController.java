@@ -56,9 +56,11 @@ public class appointmentController implements Initializable {
         window.setScene(new Scene(root, 768, 574));
     }
 
-    public void cancelButtonOnAction (ActionEvent event) {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
+    public void cancelButtonOnAction (ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/patientAccount.fxml"));
+
+        Stage window = (Stage) cancelButton.getScene().getWindow();
+        window.setScene(new Scene(root, 768, 574));
     }
 
     public void buttonOnAction(ActionEvent event) {
@@ -75,6 +77,7 @@ public class appointmentController implements Initializable {
 
         AppointmentService.addAppointment(UserService.doctor_mail_for_appointment,UserService.loggedUser.email,dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),hour);
         appointmentStatus.setText("Success");
+
 
     }
 

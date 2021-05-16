@@ -38,6 +38,8 @@ public class patientAccountController implements Initializable {
     private Button cancelButton;
     @FXML
     private ImageView searchImageView;
+    @FXML
+    private Label loggedUsername;
 
     @FXML
     private Label alertTextField;
@@ -89,6 +91,7 @@ public class patientAccountController implements Initializable {
         Image searchImage = new Image(searchFile.toURI().toString());
         searchImageView.setImage(searchImage);
 
+        loggedUsername.setText( UserService.loggedUser.username);
 
         fname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lname.setCellValueFactory(new PropertyValueFactory<>("lastName"));

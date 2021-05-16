@@ -56,6 +56,11 @@
                   <Font size="14.0" />
                </font>
             </Button>
+            <Label fx:id="loggedUsername" layoutX="642.0" layoutY="16.0" prefHeight="19.0" prefWidth="111.0">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <ImageView fx:id="mainImageView" fitHeight="432.0" fitWidth="770.0" layoutX="1.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">

@@ -13,10 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,6 +22,7 @@ import patientcare.services.AppointmentService;
 import patientcare.services.UserService;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -45,6 +43,8 @@ public class doctorAccountController implements Initializable {
     private Button logoutBtn;
     @FXML
     private Button aboutusBtn;
+    @FXML
+    private Label loggedUsername;
 
     @FXML
     private TextField filterField;
@@ -78,6 +78,8 @@ public class doctorAccountController implements Initializable {
         File searchFile = new File("images/searchicon.png");
         Image searchImage = new Image(searchFile.toURI().toString());
         searchImageView.setImage(searchImage);
+
+        loggedUsername.setText( UserService.loggedUser.username);
 
 
         fname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
