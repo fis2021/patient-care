@@ -66,10 +66,13 @@ public class appointmentController implements Initializable {
     }
 
     public void buttonOnAction(ActionEvent event) {
-        if(AppointmentService.appointmentExists(UserService.doctor_mail_for_appointment,UserService.loggedUser.email,dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),((Button)event.getSource()).getText())){
+        if(AppointmentService.appointmentExists(UserService.doctor_mail_for_appointment,dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),((Button)event.getSource()).getText())){
             appointmentStatus.setText("Appointment already exists");
+
+        }else{
+            registerAppointment(((Button)event.getSource()).getText());
         }
-        registerAppointment(((Button)event.getSource()).getText());
+
     }
 
     public void registerAppointment (String hour){

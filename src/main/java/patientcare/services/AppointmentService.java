@@ -42,12 +42,11 @@ public class AppointmentService {
         }
     }
 
-    public static boolean appointmentExists(String doctor,String patient,String date,String hour){
+    public static boolean appointmentExists(String doctor,String date,String hour){
         BasicDBObject appointment = new BasicDBObject();
         appointment.put("date",date);
         appointment.put("hour", hour);
         appointment.put("doctor",doctor);
-        appointment.put("patient",patient);
 
         DBCursor cursor = scheduleCollection.find(appointment);
         if(cursor.one() != null) return true;
