@@ -54,6 +54,18 @@ public class AppointmentService {
         return false;
     }
 
+    public static boolean appointmentExistsByPatientAndDoctor(String doctor,String patient){
+        BasicDBObject appointment = new BasicDBObject();
+        appointment.put("doctor",doctor);
+        appointment.put("patient",patient);
+
+
+        DBCursor cursor = scheduleCollection.find(appointment);
+        if(cursor.one() != null) return true;
+
+        return false;
+    }
+
 
     public static void deleteAppointment(String doctor,String patient,String date,String hour){
         BasicDBObject appointment = new BasicDBObject();
@@ -80,6 +92,17 @@ public class AppointmentService {
 
     public static void getAppointmentsByPatient(String patient){
         BasicDBObject appointment = new BasicDBObject("patient",patient);
+
+        DBCursor cursor = scheduleCollection.find(appointment);
+        while(cursor.hasNext())
+        {
+            System.out.println(cursor.next());
+            System.out.println();
+        }
+    }
+    public static void getAppointmentsByPatientAndDoctor(String patient,String doctor){
+        BasicDBObject appointment = new BasicDBObject("patient",patient);
+        appointment.put("doctor",doctor);
 
         DBCursor cursor = scheduleCollection.find(appointment);
         while(cursor.hasNext())

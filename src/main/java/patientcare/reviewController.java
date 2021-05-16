@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import patientcare.services.AppointmentService;
 import patientcare.services.UserService;
 
 import java.io.File;
@@ -55,17 +56,6 @@ public class reviewController implements Initializable {
 
     public void submitButtonOnAction (ActionEvent event) {
         String review = reviewTextField.getText();
-        String fname, lname;
-        fname = UserService.loggedUser.fname;
-        lname = UserService.loggedUser.lname;
-
-
-
-        reviewTextArea.appendText(fname + " "+ lname+ ": " +"\n "+ review);
-
-        UserService.addReview(fname + " "+ lname+ ": " +"\n "+reviewTextField.getText());
-
-
-
+        UserService.addReview(review,UserService.loggedUser.email,UserService.doctor_mail_for_appointment);
     }
  }

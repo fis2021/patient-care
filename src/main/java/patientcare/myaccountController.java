@@ -155,11 +155,19 @@ public class myaccountController implements Initializable {
 
     */
     public void handleReviewBtn() throws Exception {
+        var doctor = tableView.getSelectionModel().getSelectedItem();
+        if(AppointmentService.appointmentExistsByPatientAndDoctor(UserService.loggedUser.email,getDoctorEmail(doctor))){
+            alertTextField.setText("You should have at least one appointment to leave a review!");
 
-        Parent root = FXMLLoader.load(getClass().getResource("/review.fxml"));
+        }else{
+            alertTextField.setText("");
+            UserService.doctor_mail_for_appointment = getDoctorEmail(doctor);
+            Parent root = FXMLLoader.load(getClass().getResource("/review.fxml"));
 
-        Stage window = (Stage) reviewBtn.getScene().getWindow();
-        window.setScene(new Scene(root, 520, 365));
+            Stage window = (Stage) reviewBtn.getScene().getWindow();
+            window.setScene(new Scene(root, 520, 365));
+        }
+
     }
 
     public void handleAboutUsBtn() throws Exception {
