@@ -139,7 +139,7 @@ public class UserServiceTest {
     @Test
     public void addDoctorUser(){
 
-        addDoctorUser();
+        addTestDoctor();
 
         DBCursor cursor = UserService.getDoctorCollection().find();
         DBObject lastUserAdded = cursor.one();
@@ -165,7 +165,7 @@ public class UserServiceTest {
 
     @Test
     public void validatePatientLogin(){
-        addPatientUser();
+        addTestPatient();
 
         assertEquals(true, UserService.validateLogin("testUsername", "testPassword"));
 
@@ -174,7 +174,7 @@ public class UserServiceTest {
     }
     @Test
     public void validateDoctorLogin(){
-        addDoctorUser();
+        addTestDoctor();
 
         assertEquals(true, UserService.validateLogin("testUsername", "testPassword"));
 
