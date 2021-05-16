@@ -178,6 +178,7 @@ public class myaccountController implements Initializable {
     public void handleAppointmentBtn() throws Exception {
         if(tableView.getSelectionModel().getSelectedItem()  != null ) {
             alertTextField.setText("");
+            //appointmentController.class.setDoctorEmail()
             Parent root = FXMLLoader.load(getClass().getResource("/appointment.fxml"));
 
             Stage window = (Stage) appointmentBtn.getScene().getWindow();

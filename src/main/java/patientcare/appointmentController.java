@@ -39,6 +39,7 @@ public class appointmentController implements Initializable {
     @FXML
     private Label appointmentStatus;
 
+    public String doctor_mail;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,6 +51,10 @@ public class appointmentController implements Initializable {
         LocalDate date = LocalDate.now();
         date = LocalDate.parse(date.format(formatter), formatter);
         dateField.setValue(date);
+    }
+
+    public void setDoctorEmail(String mail){
+        this.doctor_mail=mail;
     }
 
 
