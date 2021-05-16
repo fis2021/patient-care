@@ -1,4 +1,4 @@
-package patientcare;
+package patientcare.controllers;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
@@ -15,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import patientcare.services.AppointmentService;
 import patientcare.services.UserService;
 
 import java.io.File;

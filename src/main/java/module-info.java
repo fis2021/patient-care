@@ -5,4 +5,6 @@ module patientcare {
     requires mongo.java.driver;
 
     opens patientcare;
+    opens patientcare.controllers;
+    opens patientcare.services;
 }

@@ -1,6 +1,5 @@
-package patientcare;
+package patientcare.controllers;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import javafx.collections.FXCollections;
@@ -22,7 +21,6 @@ import patientcare.services.AppointmentService;
 import patientcare.services.UserService;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -101,7 +99,6 @@ public class doctorAccountController implements Initializable {
                 ));
             }
         }
-
         dataList.addAll(pacienti);
 
         FilteredList<Patient> filteredData = new FilteredList<>(dataList, b -> true);

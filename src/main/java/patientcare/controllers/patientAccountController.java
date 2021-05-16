@@ -1,8 +1,8 @@
-package patientcare;
+package patientcare.controllers;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -13,38 +13,47 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import patientcare.services.AppointmentService;
 import patientcare.services.UserService;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class homepageController implements Initializable {
+public class patientAccountController implements Initializable {
 
     @FXML
     private ImageView mainImageView;
     @FXML
     private ImageView logoImageView;
     @FXML
-    private ImageView searchImageView;
-    @FXML
     private ImageView nameImageView;
     @FXML
     private Button cancelButton;
     @FXML
+    private ImageView searchImageView;
+    @FXML
+    private Label loggedUsername;
+
+    @FXML
+    private Label alertTextField;
+
+    @FXML
     private Button aboutusBtn;
     @FXML
-    private Button myaccountBtn;
+    private Button logoutBtn;
+    @FXML
+    private Button appointmentBtn;
+    @FXML
+    private Button reviewBtn;
+
+
 
     @FXML
     private TextField filterField;
@@ -63,6 +72,7 @@ public class homepageController implements Initializable {
 
     private final ObservableList<Doctor> dataList = FXCollections.observableArrayList();
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File mainFile = new File("images/main.jpg");
@@ -73,15 +83,15 @@ public class homepageController implements Initializable {
         Image logoImage = new Image(logoFile.toURI().toString());
         logoImageView.setImage(logoImage);
 
-        File searchFile = new File("images/searchicon.png");
-        Image searchImage = new Image(searchFile.toURI().toString());
-        searchImageView.setImage(searchImage);
-
         File nameFile = new File("images/scris.png");
         Image nameImage = new Image(nameFile.toURI().toString());
         nameImageView.setImage(nameImage);
 
+        File searchFile = new File("images/searchicon.png");
+        Image searchImage = new Image(searchFile.toURI().toString());
+        searchImageView.setImage(searchImage);
 
+        loggedUsername.setText( UserService.loggedUser.username);
 
         fname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
@@ -140,15 +150,31 @@ public class homepageController implements Initializable {
 
         tableView.setItems(sortedData);
 
+
     }
-
-
-
-
-
     public void cancelButtonOnAction (ActionEvent event) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+    }
+
+
+    public void handleReviewBtn() throws Exception {
+        var doctor = tableView.getSelectionModel().getSelectedItem();
+        if( doctor != null ) {
+            if (!AppointmentService.appointmentExistsByPatientAndDoctor(UserService.loggedUser.email, getDoctorEmail(doctor))) {
+                alertTextField.setText("You should have at least one appointment to leave a review!");
+            } else {
+                alertTextField.setText("");
+                UserService.doctor_mail_for_appointment = getDoctorEmail(doctor);
+                Parent root = FXMLLoader.load(getClass().getResource("/review.fxml"));
+
+                Stage window = (Stage) reviewBtn.getScene().getWindow();
+                window.setScene(new Scene(root, 520, 365));
+            }
+        }else {
+            alertTextField.setText("You need to select a doctor!");
+        }
+
     }
 
     public void handleAboutUsBtn() throws Exception {
@@ -158,11 +184,37 @@ public class homepageController implements Initializable {
         Stage window = (Stage) aboutusBtn.getScene().getWindow();
         window.setScene(new Scene(root, 400, 338));
     }
-    public void handleMyAccountBtn() throws Exception {
+    public void handleLogoutBtn() throws Exception {
+        //to do
+        UserService.loggedUser = null;
+        Parent root = FXMLLoader.load(getClass().getResource("/homepage.fxml"));
+        Stage window = (Stage) logoutBtn.getScene().getWindow();
+        window.setScene(new Scene(root, 768, 574));
+    }
+    public void handleAppointmentBtn() throws Exception {
+       var doctor = tableView.getSelectionModel().getSelectedItem();
+        if( doctor != null ) {
+            alertTextField.setText("");
+            UserService.doctor_mail_for_appointment = getDoctorEmail(doctor);
+            Parent root = FXMLLoader.load(getClass().getResource("/appointment.fxml"));
 
-        Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+            Stage window = (Stage) appointmentBtn.getScene().getWindow();
+            window.setScene(new Scene(root, 725, 625));
+        }else{
+            alertTextField.setText("You need to select a doctor!");
+        }
+    }
 
-        Stage window = (Stage) myaccountBtn.getScene().getWindow();
-        window.setScene(new Scene(root, 520, 400));
+
+    public String getDoctorEmail(Doctor doctor) {
+        DBObject obj = new BasicDBObject("fname",doctor.getFirstName());
+        obj.put("lname",doctor.getLastName());
+        obj.put("spec",doctor.getSpec());
+        DBCursor cursor = UserService.getDoctorCollection().find(obj);
+        if(cursor.one() != null){
+            return (String)cursor.one().get("email");
+        }
+        return "";
+
     }
 }
