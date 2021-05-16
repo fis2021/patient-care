@@ -1,8 +1,8 @@
 package patientcare;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -13,55 +13,53 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import patientcare.services.AppointmentService;
 import patientcare.services.UserService;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class homepageController implements Initializable {
+public class doctorAccountController implements Initializable {
 
     @FXML
     private ImageView mainImageView;
     @FXML
     private ImageView logoImageView;
     @FXML
-    private ImageView searchImageView;
-    @FXML
     private ImageView nameImageView;
     @FXML
     private Button cancelButton;
     @FXML
+    private ImageView searchImageView;
+    @FXML
+    private Button logoutBtn;
+    @FXML
     private Button aboutusBtn;
     @FXML
-    private Button myaccountBtn;
+    private Label loggedUsername;
 
     @FXML
     private TextField filterField;
     @FXML
-    private TableView<Doctor> tableView;
+    private TableView<Patient> tableView;
     @FXML
-    private TableColumn<Doctor,String> fname;
+    private TableColumn<Patient, String> fname;
     @FXML
-    private TableColumn<Doctor,String> lname;
+    private TableColumn<Patient, String> lname;
     @FXML
-    private TableColumn<Doctor,String> spec;
+    private TableColumn<Patient, String> email;
     @FXML
-    private TableColumn<Doctor,String> email;
-    @FXML
-    private TableColumn<Doctor,String> mobilenum;
+    private TableColumn<Patient, String> mobilenum;
 
-    private final ObservableList<Doctor> dataList = FXCollections.observableArrayList();
+    private final ObservableList<Patient> dataList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -73,42 +71,43 @@ public class homepageController implements Initializable {
         Image logoImage = new Image(logoFile.toURI().toString());
         logoImageView.setImage(logoImage);
 
-        File searchFile = new File("images/searchicon.png");
-        Image searchImage = new Image(searchFile.toURI().toString());
-        searchImageView.setImage(searchImage);
-
         File nameFile = new File("images/scris.png");
         Image nameImage = new Image(nameFile.toURI().toString());
         nameImageView.setImage(nameImage);
 
+        File searchFile = new File("images/searchicon.png");
+        Image searchImage = new Image(searchFile.toURI().toString());
+        searchImageView.setImage(searchImage);
+
+        loggedUsername.setText( UserService.loggedUser.username);
 
 
         fname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        spec.setCellValueFactory(new PropertyValueFactory<>("spec"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         mobilenum.setCellValueFactory(new PropertyValueFactory<>("mobilenum"));
 
-        ArrayList<Doctor> doctori = new ArrayList<Doctor>();
+        ArrayList<Patient> pacienti = new ArrayList<Patient>();
 
-        DBCursor cursor = UserService.getDoctorCollection().find();
-        while(cursor.hasNext()){
+        DBCursor cursor = UserService.getPatientCollection().find();
+        while(cursor.hasNext()) {
             DBObject currentCursor = cursor.next();
-            doctori.add(new Doctor(
-                    (String) currentCursor.get("fname"),
-                    (String) currentCursor.get("lname"),
-                    (String) currentCursor.get("spec"),
-                    (String) currentCursor.get("email"),
-                    (String) currentCursor.get("mobilenum")
-            ));
+            if (AppointmentService.appointmentExistsByPatientAndDoctor((String) currentCursor.get("email"), UserService.loggedUser.email)) {
+                pacienti.add(new Patient(
+                        (String) currentCursor.get("fname"),
+                        (String) currentCursor.get("lname"),
+                        (String) currentCursor.get("email"),
+                        (String) currentCursor.get("mobilenum")
+                ));
+            }
         }
 
-        dataList.addAll(doctori);
+        dataList.addAll(pacienti);
 
-        FilteredList<Doctor> filteredData = new FilteredList<>(dataList, b -> true);
+        FilteredList<Patient> filteredData = new FilteredList<>(dataList, b -> true);
 
         filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(doctor -> {
+            filteredData.setPredicate(patient -> {
 
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
@@ -116,13 +115,11 @@ public class homepageController implements Initializable {
 
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (doctor.getFirstName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                if (patient.getFirstName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true;
-                } else if (doctor.getLastName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (patient.getLastName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true;
-                } else if (doctor.getSpec().toLowerCase().indexOf(lowerCaseFilter) != -1){
-                    return true;
-                }else if (doctor.getEmail().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                }else if (patient.getEmail().toLowerCase().indexOf(lowerCaseFilter) != -1){
                     return true;
                 }
 
@@ -134,23 +131,18 @@ public class homepageController implements Initializable {
 
         });
 
-        SortedList<Doctor> sortedData = new SortedList<>(filteredData);
+        SortedList<Patient> sortedData = new SortedList<>(filteredData);
 
         sortedData.comparatorProperty().bind(tableView.comparatorProperty());
 
         tableView.setItems(sortedData);
 
+
     }
-
-
-
-
-
     public void cancelButtonOnAction (ActionEvent event) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
-
     public void handleAboutUsBtn() throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("/aboutus.fxml"));
@@ -158,11 +150,11 @@ public class homepageController implements Initializable {
         Stage window = (Stage) aboutusBtn.getScene().getWindow();
         window.setScene(new Scene(root, 400, 338));
     }
-    public void handleMyAccountBtn() throws Exception {
+    public void handleLogoutBtn() throws Exception {
+        //to do
+        Parent root = FXMLLoader.load(getClass().getResource("/homepage.fxml"));
 
-        Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
-
-        Stage window = (Stage) myaccountBtn.getScene().getWindow();
-        window.setScene(new Scene(root, 520, 400));
+        Stage window = (Stage) logoutBtn.getScene().getWindow();
+        window.setScene(new Scene(root, 768, 574));
     }
 }

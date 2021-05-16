@@ -28,13 +28,17 @@ public class Main extends Application {
         launch(args);
 
         //UserService.printDoctors();
-        //UserService.printPatients();
+        UserService.printPatients();
         //AppointmentService.printAppointment();
+
+       // UserService.printReview();
+
        // UserService.dropReviews();
-        //AppointmentService.dropDB();
+        //AppointmentService.dropDB()
         UserService.printReview();
 
-        //UserService.dropDB();
+
+        //UserService.dropDB()
        // UserService.getReviewCollection().drop();
 
         //AppointmentService.printAppointment();

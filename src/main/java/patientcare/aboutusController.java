@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import patientcare.services.UserService;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,9 +32,23 @@ public class aboutusController implements Initializable {
     }
     public void returnButtonOnAction (ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/myaccount.fxml"));
+        if(UserService.loggedUser instanceof patientcare.users.patient) {
+            Parent root = FXMLLoader.load(getClass().getResource("/patientAccount.fxml"));
 
-        Stage window = (Stage) returnButton.getScene().getWindow();
-        window.setScene(new Scene(root, 768, 574));
+            Stage window = (Stage) returnButton.getScene().getWindow();
+            window.setScene(new Scene(root, 768, 574));
+        }
+       else if (UserService.loggedUser instanceof patientcare.users.doctor){
+            Parent root = FXMLLoader.load(getClass().getResource("/doctorAccount.fxml"));
+
+            Stage window = (Stage) returnButton.getScene().getWindow();
+            window.setScene(new Scene(root, 768, 574));
+        }
+        else {
+            Parent root = FXMLLoader.load(getClass().getResource("/homepage.fxml"));
+
+            Stage window = (Stage) returnButton.getScene().getWindow();
+            window.setScene(new Scene(root, 768, 574));
+        }
     }
 }

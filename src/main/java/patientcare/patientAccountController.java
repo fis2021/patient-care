@@ -26,7 +26,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class myaccountController implements Initializable {
+public class patientAccountController implements Initializable {
 
     @FXML
     private ImageView mainImageView;
@@ -38,6 +38,8 @@ public class myaccountController implements Initializable {
     private Button cancelButton;
     @FXML
     private ImageView searchImageView;
+    @FXML
+    private Label loggedUsername;
 
     @FXML
     private Label alertTextField;
@@ -51,6 +53,8 @@ public class myaccountController implements Initializable {
     @FXML
     private Button reviewBtn;
 
+
+
     @FXML
     private TextField filterField;
     @FXML
@@ -61,6 +65,10 @@ public class myaccountController implements Initializable {
     private TableColumn<Doctor,String> lname;
     @FXML
     private TableColumn<Doctor,String> spec;
+    @FXML
+    private TableColumn<Doctor,String> email;
+    @FXML
+    private TableColumn<Doctor,String> mobilenum;
 
     private final ObservableList<Doctor> dataList = FXCollections.observableArrayList();
 
@@ -83,10 +91,13 @@ public class myaccountController implements Initializable {
         Image searchImage = new Image(searchFile.toURI().toString());
         searchImageView.setImage(searchImage);
 
+        loggedUsername.setText( UserService.loggedUser.username);
 
         fname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         spec.setCellValueFactory(new PropertyValueFactory<>("spec"));
+        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        mobilenum.setCellValueFactory(new PropertyValueFactory<>("mobilenum"));
 
         ArrayList<Doctor> doctori = new ArrayList<Doctor>();
 
@@ -96,7 +107,9 @@ public class myaccountController implements Initializable {
             doctori.add(new Doctor(
                     (String) currentCursor.get("fname"),
                     (String) currentCursor.get("lname"),
-                    (String) currentCursor.get("spec")
+                    (String) currentCursor.get("spec"),
+                    (String) currentCursor.get("email"),
+                    (String) currentCursor.get("mobilenum")
             ));
         }
 
@@ -117,8 +130,13 @@ public class myaccountController implements Initializable {
                     return true;
                 } else if (doctor.getLastName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true;
-                } else if (doctor.getSpec().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                } else if (doctor.getSpec().toLowerCase().indexOf(lowerCaseFilter) != -1){
                     return true;
+                }else if (doctor.getEmail().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }
+
+
                 else
                     return false;
 
@@ -138,22 +156,8 @@ public class myaccountController implements Initializable {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
-   /* public void handleSpecializationsBtn() throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/specializations.fxml"));
 
-        Stage window = (Stage) specializationsBtn.getScene().getWindow();
-        window.setScene(new Scene(root, 400, 400));
-    }
-    public void handleDoctorsBtn() throws Exception {
-
-        Parent root = FXMLLoader.load(getClass().getResource("/doctors.fxml"));
-
-        Stage window = (Stage) doctorsBtn.getScene().getWindow();
-        window.setScene(new Scene(root, 400, 400));
-    }
-
-    */
     public void handleReviewBtn() throws Exception {
         var doctor = tableView.getSelectionModel().getSelectedItem();
         if( doctor != null ) {
@@ -183,10 +187,9 @@ public class myaccountController implements Initializable {
     public void handleLogoutBtn() throws Exception {
         //to do
         UserService.loggedUser = null;
-        Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
-
+        Parent root = FXMLLoader.load(getClass().getResource("/homepage.fxml"));
         Stage window = (Stage) logoutBtn.getScene().getWindow();
-        window.setScene(new Scene(root, 520, 400));
+        window.setScene(new Scene(root, 768, 574));
     }
     public void handleAppointmentBtn() throws Exception {
        var doctor = tableView.getSelectionModel().getSelectedItem();

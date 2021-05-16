@@ -1,5 +1,6 @@
 package patientcare;
 
+import com.mongodb.DBCollection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +12,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import patientcare.services.AppointmentService;
 import patientcare.services.UserService;
@@ -22,8 +21,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class appointmentController implements Initializable {
@@ -39,7 +36,6 @@ public class appointmentController implements Initializable {
     @FXML
     private Label appointmentStatus;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File infoFile = new File("images/info_icon.png");
@@ -54,15 +50,17 @@ public class appointmentController implements Initializable {
 
     public void returnButtonOnAction (ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/myaccount.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/patientAccount.fxml"));
 
         Stage window = (Stage) returnButton.getScene().getWindow();
         window.setScene(new Scene(root, 768, 574));
     }
 
-    public void cancelButtonOnAction (ActionEvent event) {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
+    public void cancelButtonOnAction (ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/patientAccount.fxml"));
+
+        Stage window = (Stage) cancelButton.getScene().getWindow();
+        window.setScene(new Scene(root, 768, 574));
     }
 
     public void buttonOnAction(ActionEvent event) {
@@ -79,6 +77,7 @@ public class appointmentController implements Initializable {
 
         AppointmentService.addAppointment(UserService.doctor_mail_for_appointment,UserService.loggedUser.email,dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),hour);
         appointmentStatus.setText("Success");
+
 
     }
 

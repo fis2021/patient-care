@@ -30,6 +30,10 @@ public class UserService {
         return UserService.doctorCollection;
     }
 
+    public static DBCollection getPatientCollection(){
+        return UserService.patientCollection;
+    }
+
     public static void Initialize(){
         try{
             mongoClient = new MongoClient();

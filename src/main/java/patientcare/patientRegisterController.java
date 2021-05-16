@@ -85,10 +85,12 @@ public class patientRegisterController implements Initializable {
             this.emptyTextField();
             UserService.checkExistingMail(emailTextField.getText());
             UserService.checkExistingUsername(usernameTextField.getText());
+
             if (setPasswordField.getText().equals(confirmPasswordField.getText())) {
                 registerUser();
                 confirmPasswordLabel.setText("");
                 registrationLabelMessage.setText("User has been registered successfully!");
+
                 Thread.sleep(1500);
 
                 Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
