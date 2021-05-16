@@ -1,5 +1,6 @@
 package patientcare;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,7 +43,9 @@ public class reviewController implements Initializable {
         Image logoImage = new Image(logoFile.toURI().toString());
         logoImageView.setImage(logoImage);
 
-        DBCursor cursor = UserService.getReviewCollection().find();
+        BasicDBObject review = new BasicDBObject();
+        review.put("doctor",UserService.doctor_mail_for_appointment);
+        DBCursor cursor = UserService.getReviewCollection().find(review);
         while(cursor.hasNext()){
             reviewTextArea.appendText((String) cursor.next().get("review")+"\n");
         }
