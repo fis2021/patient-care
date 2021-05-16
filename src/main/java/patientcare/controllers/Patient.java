@@ -1,18 +1,16 @@
-package patientcare;
+package patientcare.controllers;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Doctor {
-    private  final SimpleStringProperty firstName;
+public class Patient {
+    private final SimpleStringProperty firstName;
     private final SimpleStringProperty lastName;
-    private final SimpleStringProperty spec;
     private final SimpleStringProperty email;
     private final SimpleStringProperty mobilenum;
 
-    Doctor(String fName,String lName, String spec,String email,String mobilenum){
+    Patient(String fName,String lName,String email,String mobilenum){
         this.firstName= new SimpleStringProperty(fName);
         this.lastName= new SimpleStringProperty(lName);
-        this.spec= new SimpleStringProperty(spec);
         this.email= new SimpleStringProperty(email);
         this.mobilenum= new SimpleStringProperty(mobilenum);
 
@@ -35,14 +33,6 @@ public class Doctor {
         lastName.set(lName);
     }
 
-    public String getSpec() {
-
-        return spec.get();
-    }
-    public void setSpec(String Spec) {
-
-        spec.set(Spec);
-    }
 
     public String getEmail() {
 
@@ -60,4 +50,6 @@ public class Doctor {
 
         mobilenum.set(Mobilenum);
     }
+
+
 }

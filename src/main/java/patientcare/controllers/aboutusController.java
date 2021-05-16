@@ -1,4 +1,4 @@
-package patientcare;
+package patientcare.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

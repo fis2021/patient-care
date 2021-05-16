@@ -1,6 +1,5 @@
-package patientcare;
+package patientcare.controllers;
 
-import com.mongodb.DBCollection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

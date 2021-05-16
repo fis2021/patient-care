@@ -1,4 +1,4 @@
-package patientcare;
+package patientcare.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
