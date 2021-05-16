@@ -46,12 +46,11 @@ public class UserService {
 
 
     }
-    public static void addReview (String  review){
+    public static void addReview (String  review,String patientMail,String doctorMail){
         BasicDBObject userReview = new BasicDBObject();
-
-        //userReview.put("fname", fname);
-       // userReview.put("lname", lname);
         userReview.put("review", review);
+        userReview.put("patient",patientMail);
+        userReview.put("doctor",doctorMail);
 
         reviewCollection.insert(userReview);
 
@@ -144,6 +143,10 @@ public class UserService {
     public static void dropDB () {
         doctorCollection.drop();
         patientCollection.drop();
+        reviewCollection.drop();
+    }
+
+    public static void dropReviews() {
         reviewCollection.drop();
     }
 
