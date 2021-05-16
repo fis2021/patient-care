@@ -18,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import patientcare.services.AppointmentService;
 import patientcare.services.UserService;
 
 import java.io.File;
@@ -180,9 +181,7 @@ public class myaccountController implements Initializable {
        var doctor = tableView.getSelectionModel().getSelectedItem();
         if( doctor != null ) {
             alertTextField.setText("");
-            appointmentController app =  new appointmentController();
-            app.setPatient_mail(UserService.loggedUser.email);
-            app.setDoctorEmail(getDoctorEmail(doctor));
+            UserService.doctor_mail_for_appointment = getDoctorEmail(doctor);
             Parent root = FXMLLoader.load(getClass().getResource("/appointment.fxml"));
 
             Stage window = (Stage) appointmentBtn.getScene().getWindow();

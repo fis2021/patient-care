@@ -9,6 +9,8 @@ public class AppointmentService {
     private static DBCollection scheduleCollection;
     private static DB database;
 
+
+
     public static void Initialize(){
         try{
             mongoClient = new MongoClient();
@@ -22,11 +24,12 @@ public class AppointmentService {
         }
     }
 
-    public static void addAppointment(String doctor,String date, String hour) {
+    public static void addAppointment(String doctor,String patient,String date, String hour) {
         BasicDBObject appointment = new BasicDBObject();
         appointment.put("date",date);
         appointment.put("hour", hour);
         appointment.put("doctor",doctor);
+        appointment.put("patient",patient);
 
         scheduleCollection.insert(appointment);
     }
@@ -39,11 +42,12 @@ public class AppointmentService {
         }
     }
 
-    public static boolean appointmentExists(String doctor,String date,String hour){
+    public static boolean appointmentExists(String doctor,String patient,String date,String hour){
         BasicDBObject appointment = new BasicDBObject();
         appointment.put("date",date);
         appointment.put("hour", hour);
         appointment.put("doctor",doctor);
+        appointment.put("patient",patient);
 
         DBCursor cursor = scheduleCollection.find(appointment);
         if(cursor.one() != null) return true;
@@ -52,19 +56,31 @@ public class AppointmentService {
     }
 
 
-    public static void deleteAppointment(String doctor,String date,String hour){
+    public static void deleteAppointment(String doctor,String patient,String date,String hour){
         BasicDBObject appointment = new BasicDBObject();
         appointment.put("date",date);
         appointment.put("hour", hour);
         appointment.put("doctor",doctor);
+        appointment.put("patient",patient);
 
         DBCursor cursor = scheduleCollection.find(appointment);
         if(cursor.hasNext()) AppointmentService.scheduleCollection .remove(cursor.next());
 
     }
 
-    public static void getAppointments(String doctor){
+    public static void getAppointmentsByDoctor(String doctor){
         BasicDBObject appointment = new BasicDBObject("doctor",doctor);
+
+        DBCursor cursor = scheduleCollection.find(appointment);
+        while(cursor.hasNext())
+        {
+            System.out.println(cursor.next());
+            System.out.println();
+        }
+    }
+
+    public static void getAppointmentsByPatient(String patient){
+        BasicDBObject appointment = new BasicDBObject("patient",patient);
 
         DBCursor cursor = scheduleCollection.find(appointment);
         while(cursor.hasNext())

@@ -39,15 +39,7 @@ public class appointmentController implements Initializable {
     @FXML
     private Label appointmentStatus;
 
-    public String doctor_mail;
-    public String patient_mail;
-    public void setDoctorEmail(String mail){
-        this.doctor_mail=mail;
-    }
 
-    public void setPatient_mail(String mail){
-        this.patient_mail = mail;
-    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File infoFile = new File("images/info_icon.png");
@@ -59,11 +51,6 @@ public class appointmentController implements Initializable {
         date = LocalDate.parse(date.format(formatter), formatter);
         dateField.setValue(date);
     }
-
-
-
-
-
 
     public void returnButtonOnAction (ActionEvent event) throws IOException {
 
@@ -79,16 +66,15 @@ public class appointmentController implements Initializable {
     }
 
     public void buttonOnAction(ActionEvent event) {
-        if(AppointmentService.appointmentExists("",dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),((Button)event.getSource()).getText())){
+        if(AppointmentService.appointmentExists(UserService.doctor_mail_for_appointment,UserService.loggedUser.email,dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),((Button)event.getSource()).getText())){
             appointmentStatus.setText("Appointment already exists");
         }
-        //we need to add a function that stores the doctor name,after we select it from the list or id,idk
-        registerAppointment("",((Button)event.getSource()).getText());
+        registerAppointment(((Button)event.getSource()).getText());
     }
 
-    public void registerAppointment (String doctor,String hour){
+    public void registerAppointment (String hour){
 
-        AppointmentService.addAppointment("",dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),hour);
+        AppointmentService.addAppointment(UserService.doctor_mail_for_appointment,UserService.loggedUser.email,dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),hour);
         appointmentStatus.setText("Success");
 
     }

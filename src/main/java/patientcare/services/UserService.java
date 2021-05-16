@@ -20,6 +20,7 @@ public class UserService {
 
     public static user loggedUser;
     private static DB database;
+    public static String doctor_mail_for_appointment;
 
     public static DBCollection getReviewCollection(){
         return UserService.reviewCollection;
