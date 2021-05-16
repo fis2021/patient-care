@@ -6,12 +6,15 @@ public class Doctor {
     private  final SimpleStringProperty firstName;
     private final SimpleStringProperty lastName;
     private final SimpleStringProperty spec;
+    private final SimpleStringProperty email;
+    //private final SimpleStringProperty phnum;
 
-    Doctor(String fName,String lName, String spec){
+    Doctor(String fName,String lName, String spec,String email){
         this.firstName= new SimpleStringProperty(fName);
         this.lastName= new SimpleStringProperty(lName);
         this.spec= new SimpleStringProperty(spec);
-
+        this.email= new SimpleStringProperty(email);
+        //this.phnum= new SimpleStringProperty(phnum);
 
     }
     public String getFirstName() {
@@ -19,6 +22,7 @@ public class Doctor {
         return firstName.get();
     }
     public void setFirstName(String fName) {
+
         firstName.set(fName);
     }
 
@@ -40,4 +44,22 @@ public class Doctor {
         spec.set(Spec);
     }
 
+    public String getEmail() {
+
+        return email.get();
+    }
+    public void setEmail(String Email) {
+
+        email.set(Email);
+    }
+    /*public String getPhnumber() {
+
+        return phnum.get();
+    }
+    public void setPhnumber(String Phnumber) {
+
+        phnum.set(Phnumber);
+    }
+
+     */
 }

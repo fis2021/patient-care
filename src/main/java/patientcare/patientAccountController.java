@@ -47,8 +47,7 @@ public class patientAccountController implements Initializable {
     private Button appointmentBtn;
     @FXML
     private Button reviewBtn;
-    @FXML
-    private Button infoBtn;
+
 
 
     @FXML
@@ -61,6 +60,10 @@ public class patientAccountController implements Initializable {
     private TableColumn<Doctor,String> lname;
     @FXML
     private TableColumn<Doctor,String> spec;
+    @FXML
+    private TableColumn<Doctor,String> email;
+    @FXML
+    private TableColumn<Doctor,String> phnum;
 
     private final ObservableList<Doctor> dataList = FXCollections.observableArrayList();
 
@@ -87,6 +90,8 @@ public class patientAccountController implements Initializable {
         fname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         spec.setCellValueFactory(new PropertyValueFactory<>("spec"));
+        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+       // phnum.setCellValueFactory(new PropertyValueFactory<>("phnum"));
 
         ArrayList<Doctor> doctori = new ArrayList<Doctor>();
 
@@ -96,7 +101,9 @@ public class patientAccountController implements Initializable {
             doctori.add(new Doctor(
                     (String) currentCursor.get("fname"),
                     (String) currentCursor.get("lname"),
-                    (String) currentCursor.get("spec")
+                    (String) currentCursor.get("spec"),
+                    (String) currentCursor.get("email")
+                    //(String) currentCursor.get("phnum")
             ));
         }
 
@@ -117,8 +124,13 @@ public class patientAccountController implements Initializable {
                     return true;
                 } else if (doctor.getLastName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true;
-                } else if (doctor.getSpec().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                } else if (doctor.getSpec().toLowerCase().indexOf(lowerCaseFilter) != -1){
                     return true;
+                }else if (doctor.getEmail().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }
+
+
                 else
                     return false;
 

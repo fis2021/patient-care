@@ -60,6 +60,10 @@ public class homepageController implements Initializable {
     private TableColumn<Doctor,String> lname;
     @FXML
     private TableColumn<Doctor,String> spec;
+    @FXML
+    private TableColumn<Doctor,String> email;
+    @FXML
+    private TableColumn<Doctor,String> phnumber;
 
     private final ObservableList<Doctor> dataList = FXCollections.observableArrayList();
 
@@ -82,11 +86,11 @@ public class homepageController implements Initializable {
         nameImageView.setImage(nameImage);
 
 
-        fname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        /*fname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         spec.setCellValueFactory(new PropertyValueFactory<>("spec"));
-
-
+        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        phnumber.setCellValueFactory(new PropertyValueFactory<>("phnumber"));
 
         ArrayList<Doctor> doctori = new ArrayList<Doctor>();
 
@@ -96,7 +100,9 @@ public class homepageController implements Initializable {
             doctori.add(new Doctor(
                     (String) currentCursor.get("fname"),
                     (String) currentCursor.get("lname"),
-                    (String) currentCursor.get("spec")
+                    (String) currentCursor.get("spec"),
+                    (String) currentCursor.get("email"),
+                    (String) currentCursor.get("phnumber")
             ));
         }
 
@@ -131,7 +137,11 @@ public class homepageController implements Initializable {
         sortedData.comparatorProperty().bind(tableView.comparatorProperty());
 
         tableView.setItems(sortedData);
+
+         */
     }
+
+
 
 
 

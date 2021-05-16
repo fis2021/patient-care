@@ -51,12 +51,14 @@
             <Image url="@../../../images/main.jpg" />
          </image>
       </ImageView>
-      <TableView fx:id="tableView" layoutX="140.0" layoutY="161.0" prefHeight="346.0" prefWidth="495.0" style="-fx-background-color: #87a38a;">
-        <columns>
-          <TableColumn fx:id="fname" prefWidth="165.0" text="First Name" />
-          <TableColumn fx:id="lname" prefWidth="165.0" text="Last Name" />
-            <TableColumn fx:id="spec" prefWidth="162.39996337890625" text="Specialization" />
-        </columns>
+      <TableView fx:id="tableView1" layoutX="46.0" layoutY="181.0" prefHeight="346.0" prefWidth="700.0" style="-fx-background-color: #87a38a;">
+         <columns>
+            <TableColumn fx:id="fname1" prefWidth="140.0" text="First Name" />
+            <TableColumn fx:id="lname1" prefWidth="140.0" text="Last Name" />
+            <TableColumn fx:id="spec1" prefWidth="140.0" text="Specialization" />
+            <TableColumn fx:id="email" prefWidth="140.0" text="Email" />
+            <TableColumn fx:id="phnumber" prefWidth="140.0" text="Phone Number" />
+         </columns>
       </TableView>
    </children>
 </AnchorPane>
