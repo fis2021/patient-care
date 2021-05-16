@@ -67,7 +67,7 @@
             <TableColumn fx:id="lname" prefWidth="140.0" text="Last Name" />
             <TableColumn fx:id="spec" prefWidth="140.0" text="Specialization" />
             <TableColumn fx:id="email" prefWidth="140.0" text="Email" />
-            <TableColumn fx:id="phnum" prefWidth="140.0" text="Phone Number" />
+            <TableColumn fx:id="mobilenum" prefWidth="140.0" text="Phone Number" />
          </columns>
       </TableView>
    </children>

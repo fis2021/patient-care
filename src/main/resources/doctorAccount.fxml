@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="patientcare.patientAccountController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="patientcare.doctorAccountController">
    <children>
       <AnchorPane prefHeight="84.0" prefWidth="768.0" style="-fx-background-color: #045D1B;">
          <children>
@@ -51,11 +51,12 @@
             <Image url="@../../../images/main.jpg" />
          </image>
       </ImageView>
-      <TableView fx:id="tableView" layoutX="150.0" layoutY="171.0" prefHeight="346.0" prefWidth="495.0" style="-fx-background-color: #87a38a;">
+      <TableView fx:id="tableView" layoutX="104.0" layoutY="185.0" prefHeight="346.0" prefWidth="560.0" style="-fx-background-color: #87a38a;">
          <columns>
-            <TableColumn fx:id="fname" prefWidth="165.0" text="First Name" />
-            <TableColumn fx:id="lname" prefWidth="165.0" text="Last Name" />
-            <TableColumn fx:id="spec" prefWidth="162.39996337890625" text="Specialization" />
+            <TableColumn fx:id="fname" prefWidth="140.0" text="First Name" />
+            <TableColumn fx:id="lname" prefWidth="140.0" text="Last Name" />
+            <TableColumn fx:id="email" prefWidth="140.0" text="Email" />
+            <TableColumn fx:id="mobilenum" prefWidth="140.0" text="Phone Number" />
          </columns>
       </TableView>
    </children>

@@ -42,10 +42,6 @@ public class homepageController implements Initializable {
     @FXML
     private Button cancelButton;
     @FXML
-    private Button specializationsBtn;
-    @FXML
-    private Button doctorsBtn;
-    @FXML
     private Button aboutusBtn;
     @FXML
     private Button myaccountBtn;
@@ -63,7 +59,7 @@ public class homepageController implements Initializable {
     @FXML
     private TableColumn<Doctor,String> email;
     @FXML
-    private TableColumn<Doctor,String> phnumber;
+    private TableColumn<Doctor,String> mobilenum;
 
     private final ObservableList<Doctor> dataList = FXCollections.observableArrayList();
 
@@ -86,11 +82,12 @@ public class homepageController implements Initializable {
         nameImageView.setImage(nameImage);
 
 
-        /*fname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+
+        fname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         spec.setCellValueFactory(new PropertyValueFactory<>("spec"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
-        phnumber.setCellValueFactory(new PropertyValueFactory<>("phnumber"));
+        mobilenum.setCellValueFactory(new PropertyValueFactory<>("mobilenum"));
 
         ArrayList<Doctor> doctori = new ArrayList<Doctor>();
 
@@ -102,7 +99,7 @@ public class homepageController implements Initializable {
                     (String) currentCursor.get("lname"),
                     (String) currentCursor.get("spec"),
                     (String) currentCursor.get("email"),
-                    (String) currentCursor.get("phnumber")
+                    (String) currentCursor.get("mobilenum")
             ));
         }
 
@@ -123,8 +120,13 @@ public class homepageController implements Initializable {
                     return true;
                 } else if (doctor.getLastName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true;
-                } else if (doctor.getSpec().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                } else if (doctor.getSpec().toLowerCase().indexOf(lowerCaseFilter) != -1){
                     return true;
+                }else if (doctor.getEmail().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }
+
+
                 else
                     return false;
 
@@ -138,7 +140,6 @@ public class homepageController implements Initializable {
 
         tableView.setItems(sortedData);
 
-         */
     }
 
 
