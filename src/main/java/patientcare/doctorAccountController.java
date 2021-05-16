@@ -87,20 +87,17 @@ public class doctorAccountController implements Initializable {
 
         ArrayList<Patient> pacienti = new ArrayList<Patient>();
 
-        DBObject obj = new BasicDBObject("doctor",UserService.loggedUser.email);
-
-        DBCursor cursor = AppointmentService.getAppointmentCollection().find(obj);
-        while(cursor.hasNext()){
-            DBObject patients = new BasicDBObject("email", (String)cursor.one().get("patient"));
-            System.out.println(cursor.one());
-            DBCursor currentCursor =  UserService.getPatientCollection().find(patients);
-            System.out.println(currentCursor.one());
-            pacienti.add(new Patient(
-                    (String) currentCursor.one().get("fname"),
-                    (String) currentCursor.one().get("lname"),
-                    (String) currentCursor.one().get("email"),
-                    (String) currentCursor.one().get("mobilenum")
-            ));
+        DBCursor cursor = UserService.getPatientCollection().find();
+        while(cursor.hasNext()) {
+            DBObject currentCursor = cursor.next();
+            if (AppointmentService.appointmentExistsByPatientAndDoctor((String) currentCursor.get("email"), UserService.loggedUser.email)) {
+                pacienti.add(new Patient(
+                        (String) currentCursor.get("fname"),
+                        (String) currentCursor.get("lname"),
+                        (String) currentCursor.get("email"),
+                        (String) currentCursor.get("mobilenum")
+                ));
+            }
         }
 
         dataList.addAll(pacienti);
