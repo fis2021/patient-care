@@ -35,6 +35,7 @@ public class Main extends Application {
         //UserService.dropDB();
        // UserService.getReviewCollection().drop();
         // AppointmentService.dropDB();
+        AppointmentService.printAppointment();
     }
 
 }

@@ -23,5 +23,8 @@ public abstract class user {
         this.logged = logged;
 
     }
+    public String getEmail() {
+        return this.email;
+    }
 
 }

@@ -58,7 +58,7 @@ public class loginController implements Initializable {
         loginMessageLabel.setText("You try to login");
          if(usernameTextField.getText().isEmpty() == false && enterPasswordField.getText().isEmpty() == false) {
              if (UserService.validateLogin(usernameTextField.getText(),enterPasswordField.getText())){
-                    loginMessageLabel.setText("Login Successful");
+                 loginMessageLabel.setText("Login Successful");
 
                  Parent root = FXMLLoader.load(getClass().getResource("/myaccount.fxml"));
 
