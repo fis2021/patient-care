@@ -54,7 +54,7 @@ public class AppointmentService {
         return false;
     }
 
-    public static boolean appointmentExistsByPatientAndDoctor(String doctor,String patient){
+    public static boolean appointmentExistsByPatientAndDoctor(String patient,String doctor){
         BasicDBObject appointment = new BasicDBObject();
         appointment.put("doctor",doctor);
         appointment.put("patient",patient);

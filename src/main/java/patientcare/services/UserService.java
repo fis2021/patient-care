@@ -146,6 +146,10 @@ public class UserService {
         reviewCollection.drop();
     }
 
+    public static void dropReviews() {
+        reviewCollection.drop();
+    }
+
     public static boolean validateLogin (String username,String password) {
         DBObject obj = new BasicDBObject("username",username);
         obj.put("password",encodePassword(password));

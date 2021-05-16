@@ -30,12 +30,15 @@ public class Main extends Application {
         //UserService.printDoctors();
         //UserService.printPatients();
         //AppointmentService.printAppointment();
+       // UserService.dropReviews();
+        //AppointmentService.dropDB();
         UserService.printReview();
 
         //UserService.dropDB();
        // UserService.getReviewCollection().drop();
-        //AppointmentService.dropDB();
+
         //AppointmentService.printAppointment();
+
     }
 
 }
